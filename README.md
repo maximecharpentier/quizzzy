@@ -1,7 +1,7 @@
-# react-trivia-c-n-c
+# Quizzzy
 
 🧭 A 1month project for @ecolehetic, with the aim of creating an interactive story, using @react.
-> [⚛️ React scripts](https://github.com/react-trivia-c-n-c/scripts.md)
+> [⚛️ React scripts](https://github.com/Quizzzy/scripts.md)
 
 # Technos
 
