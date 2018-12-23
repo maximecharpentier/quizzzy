@@ -5,7 +5,8 @@
 
 ## Run it
 
-At the root of the repo, in 2 different command line: `yarn start` & `gulp`
+- Install all dependencies: `yarn` or `npm i`
+- At the root of the repo, in 2 different command line: `yarn start` & `gulp`
 
 ## Technos
 
