@@ -18,8 +18,8 @@ gulp.task('scss', () => {
 });
 
 gulp.task('build', ['scss']);
-
-gulp.task('default', () => {
-    gulp.watch('src/scss/**/*.scss', ['scss']);
+gulp.task('watch', () => {
+	gulp.watch('src/scss/**/*.scss', ['scss']);
 });
--
+
+gulp.task('default', ['watch']);
