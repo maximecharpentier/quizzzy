@@ -3,7 +3,7 @@
 🧭 A 1month project for @ecolehetic, with the aim of creating an interactive story, using @react.
 > [⚛️ React scripts](https://github.com/Quizzzy/scripts.md)
 
-# Technos
+## Technos
 
 - [reactjs](https://reactjs.org/)
 - [jService](http://jservice.io/)
