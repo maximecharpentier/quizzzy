@@ -23,13 +23,13 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "browser-sync": "^2.26.3",
     "gulp": "^3.9.1",
     "gulp-clean-css": "^4.0.0",
     "gulp-plumber": "^1.2.1",
     "gulp-rename": "^1.4.0",
     "gulp-resolve-url": "0.0.2",
     "gulp-sass": "^4.0.2",
-    "gulp-sourcemaps": "^2.6.4",
-    "node-sass": "^4.10.0"
+    "gulp-sourcemaps": "^2.6.4"
   }
 }
