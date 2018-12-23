@@ -1,28 +1,18 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './css/master.min.css';
+import theData from './data'
+import Header from './Header';
+import CategoryTile from './CategoryTile';
+import Footer from './Footer';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <section className='App'>
+                <Header data={theData}/>
+                <CategoryTile data={theData}/>
+                <Footer data={theData}/>
+            </section>
+        )
+    }
 }
-
 export default App;
