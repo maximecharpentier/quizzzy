@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import Header from './Header';
-import Footer from './Footer';
 import theData from './data'
+import Header from './Header';
+import CategoryTile from './CategoryTile';
+import Footer from './Footer';
 
 class App extends Component {
     render() {
         return (
             <section className='App'>
                 <Header data={theData}/>
-                <Footer/>
+                <CategoryTile data={theData}/>
+                <Footer data={theData}/>
             </section>
         )
     }

@@ -4,7 +4,7 @@ class Footer extends Component {
     render() {
         return (
             <footer className='Footer'>
-            HÉTIC WP2020 - powered by <a href="jservice.io">jService</a>
+            {Object.values(this.props.data.footer).join(' - ')}
             </footer>
         )
     }
