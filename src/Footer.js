@@ -1,8 +1,12 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 
 class Footer extends Component {
     render() {
-        return 'Footer.js'
+        return (
+            <footer className='Footer'>
+            HÉTIC WP2020 - powered by <a href="jservice.io">jService</a>
+            </footer>
+        )
     }
 }
 export default Footer;
