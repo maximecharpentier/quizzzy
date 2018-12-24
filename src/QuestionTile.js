@@ -47,4 +47,5 @@ class QuestionTile extends Component {
         )
     }
 }
+
 export default QuestionTile;
