@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import correctSVG from './assets/imgs/correct.svg'
+import wrongSVG from './assets/imgs/false.svg'
 
 class QuestionHeader extends Component {
     render() {
         return (
             <header className="QuestionTile__header">
                 <span className="QuestionTile__header__counter">Question 1</span>
-                <span className="QuestionTile__header__points">00/10</span>
+                <span className="QuestionTile__header__points">0{this.props.points}/10</span>
             </header>
         )
     }
@@ -23,13 +25,45 @@ class QuestionFooter extends Component {
 }
 
 class Question extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            answer: '',
+            trueanswer: this.props.api.clues[1].answer,
+            visual: wrongSVG,
+            points: 9
+        }
+    }
+    onSubmit = (e) => {
+        e.preventDefault();
+        if (this.state.answer.toLowerCase() === this.state.trueanswer.toLowerCase()) {
+            this.setState({
+                visual: correctSVG,
+                points: this.state.points + 1
+            })
+            console.log('win');
+        }
+        else console.log('loose');
+    }
+    changeValue = (e) => {
+        this.setState({
+            answer: e.target.value,
+            visual: wrongSVG
+        })
+    }
     render() {
         return (
             <div className="QuestionTile__question">
-                <h3 className="QuestionTile__question__title">{this.props.api.clues[6].question}</h3>
-                <form className="QuestionTile__question__form">
-                    <input type="text" className="QuestionTile__question__input" placeholder="duh"/>
+                <h3 className="QuestionTile__question__title">{this.props.api.clues[1].question}</h3>
+                <form className="QuestionTile__question__form" onSubmit={this.onSubmit}>
+                    <input 
+                    className="QuestionTile__question__input" 
+                    type="text" 
+                    value={this.state.answer} 
+                    onChange={this.changeValue}
+                    placeholder="duh"/>
                     <button className="QuestionTile__question__submit">OK</button>
+                    <img src={this.state.visual} alt=""/>
                 </form>
             </div>
         )
@@ -42,7 +76,8 @@ class QuestionTile extends Component {
         this.state = {
             error: null,
             isLoaded: false,
-            result: {}
+            result: {},
+            points: 2
         }
     }
     componentDidMount = () => {
@@ -54,6 +89,7 @@ class QuestionTile extends Component {
                 isLoaded: true,
                 result: result
             });
+            console.log(this.state.result)
         },
         (error) => {
             this.setState({
@@ -71,7 +107,7 @@ class QuestionTile extends Component {
         } else {
           return (
             <section className="QuestionTile">
-                <QuestionHeader api={result}/>
+                <QuestionHeader api={result} points={this.state.points}/>
                 <Question api={result}/>
                 <QuestionFooter api={result}/>
             </section>

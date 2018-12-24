@@ -1,3 +1,7 @@
 .QuestionTile {
     border: 1px purple solid;
+    &__header {
+        display: flex;
+        justify-content: space-between
+    }
 }
