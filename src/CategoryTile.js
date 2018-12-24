@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react';
-import bridge from './assets/imgs/bridge.svg';
-import dusk from './assets/imgs/dusk.svg';
-import cape from './assets/imgs/cape.svg';
+import brandSVG from './assets/imgs/brand.svg';
+import capitalSVG from './assets/imgs/capital.svg';
+import moviesSVG from './assets/imgs/movies.svg';
 
+const SVGs = [brandSVG, capitalSVG, moviesSVG];
 class CategoryTile extends Component {
     constructor(props) {
         super(props);
@@ -17,7 +18,7 @@ class CategoryTile extends Component {
     }
     render() {
         let CategoryName = this.props.data.categories[this.state.bite].name;
-        let CategoryUrl = this.props.data.categories[this.state.bite].url;
+        let CategoryUrl = SVGs[this.state.bite];
         return (
             <section className='CategoryTile' onClick={this.onClick}>
                 <h2>{this.props.data.category.title}</h2>
