@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import winSVG from './assets/imgs/winner.svg';
+// import winSVG from './assets/imgs/winner.svg';
 import looseSVG from './assets/imgs/looser.svg';
 
 class ResultTile extends Component {
