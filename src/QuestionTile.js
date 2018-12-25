@@ -4,23 +4,27 @@ import wrongSVG from './assets/imgs/false.svg'
 import QuestionHeader from './QuestionHeader';
 import QuestionFooter from './QuestionFooter';
 import Question from './Question';
+import texts from './data'
 
+
+let storagePoints = 0;
+localStorage.setItem('points', storagePoints)
 class QuestionTile extends Component {
     constructor(props) {
-      super(props);
-      this.state = {
-        error: null,
-        isLoaded: false,
-        result: {},
-        points: 0,
-        question: 1,
-        index: 0,
-        reset: 0,
-        answer: '',
-        trueanswer: '',
-        submited: true,
-        visual: wrongSVG
-      }
+        super(props);
+        this.state = {
+            error: null,
+            isLoaded: false,
+            result: {},
+            points: 0,
+            question: 1,
+            index: 0,
+            reset: 0,
+            answer: '',
+            trueanswer: '',
+            submited: false,
+            visual: wrongSVG
+        }
     }
     componentDidMount = () => {
         fetch('http://jservice.io/api/category?id=78')
@@ -55,7 +59,11 @@ class QuestionTile extends Component {
             this.setState({
                 trueanswer: this.state.result.clues[this.state.question].answer
             });
+            storagePoints++;
+            localStorage.setItem('points', storagePoints)
+            console.log(texts)
             console.log('win');
+
         }
         console.log('loose');
         this.setState({
@@ -68,6 +76,7 @@ class QuestionTile extends Component {
             trueanswer: this.state.result.clues[this.state.question].answer
         });
         console.log(this.state)
+        console.log(localStorage.getItem('points'))
     }
     onChange = (e) => {
         this.setState({
