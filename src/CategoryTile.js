@@ -7,18 +7,18 @@ const SVGs = [brandSVG, capitalSVG, moviesSVG];
 class CategoryTile extends Component {
     constructor(props) {
         super(props);
-        this.state = {bite: 0}
+        this.state = {index: 0}
     }
     onClick = (e) => {
         e.preventDefault();
         console.log('wow !');
-        if (this.state.bite <=1) this.setState({bite: this.state.bite + 1});
-        else this.setState({bite: 0});
-        console.log(this.state.bite);
+        if (this.state.index <=1) this.setState({index: this.state.index + 1});
+        else this.setState({index: 0});
+        console.log(this.state.index);
     }
     render() {
-        let CategoryName = this.props.data.categories[this.state.bite].name;
-        let CategoryUrl = SVGs[this.state.bite];
+        let CategoryName = this.props.data.categories[this.state.index].name;
+        let CategoryUrl = SVGs[this.state.index];
         return (
             <section className='CategoryTile' onClick={this.onClick}>
                 <h2>{this.props.data.category.title}</h2>

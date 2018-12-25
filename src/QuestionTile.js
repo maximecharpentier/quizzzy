@@ -4,22 +4,32 @@ import wrongSVG from './assets/imgs/false.svg'
 import QuestionHeader from './QuestionHeader';
 import QuestionFooter from './QuestionFooter';
 import Question from './Question';
+import texts from './data'
 
+
+let storagePoints = 0;
+let storageQuestions = 0;
+localStorage.setItem('points', storagePoints)
+localStorage.setItem('questions', storageQuestions)
 class QuestionTile extends Component {
     constructor(props) {
-      super(props);
-      this.state = {
-        error: null,
-        isLoaded: false,
-        result: {},
-        points: 0,
-        visual: wrongSVG,
-        answer: '',
-        trueanswer: '',
-      }
+        super(props);
+        this.state = {
+            error: null,
+            isLoaded: false,
+            result: {},
+            points: 0,
+            question: 1,
+            index: 0,
+            reset: 0,
+            answer: '',
+            trueanswer: '',
+            submited: false,
+            visual: wrongSVG
+        }
     }
     componentDidMount = () => {
-        fetch('http://jservice.io/api/category?id=78')
+        fetch('http://jservice.io/api/category?id=2537')
         .then(api => api.json())
         .then(
         (result) => {
@@ -35,7 +45,9 @@ class QuestionTile extends Component {
                 error
             });
         })
-        .then(() => this.setState({trueanswer: this.state.result.clues[1].answer}))
+        .then(() => this.setState({
+            trueanswer: this.state.result.clues[0].answer
+        }))
         .then(() => console.log(this.state));
     }
 
@@ -46,19 +58,42 @@ class QuestionTile extends Component {
                 visual: correctSVG,
                 points: this.state.points + 1
             })
+            this.setState({
+                trueanswer: this.state.result.clues[this.state.question].answer
+            });
+            storagePoints++;
+            localStorage.setItem('points', storagePoints)
+            console.log(texts)
             console.log('win');
+
         }
-        else console.log('loose');
+        console.log('loose');
+        this.setState({
+            question: this.state.question + 1,
+            index: this.state.index + 1,
+            answer: '',
+            submited: true
+        })
+        this.setState({
+            trueanswer: this.state.result.clues[this.state.question].answer
+        });
+        storageQuestions++;
+        localStorage.setItem('questions', storageQuestions)
+        console.log(this.state)
+        console.log(localStorage.getItem('points'))
     }
     onChange = (e) => {
         this.setState({
             answer: e.target.value,
+            submited: false,
             visual: wrongSVG
         })
+        console.log(this.state.trueanswer)
     }
 
     render() {
         const { error, isLoaded, result } = this.state;
+
         if (error) {
           return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
@@ -66,14 +101,21 @@ class QuestionTile extends Component {
         } else {
           return (
             <section className="QuestionTile">
-                <QuestionHeader api={result} points={this.state.points}/>
+                <QuestionHeader 
+                api={result} points={this.state.points}
+                question={this.state.question}/>
                 <Question 
-                    submitParam={this.onSubmit} 
+                    onSubmit={this.onSubmit} 
                     api={result} 
-                    changeParam={this.onChange} 
-                    theAnswer={this.state.answer} 
-                    theVisual={this.state.visual}/>
-                <QuestionFooter api={result}/>
+                    onChange={this.onChange} 
+                    answer={this.state.answer} 
+                    visual={this.state.visual}
+                    question={this.state.index}
+                    css={this.state.submited ? 'showed' : 'hidden'}
+                    submited={this.state.submited}/>
+                <QuestionFooter 
+                    api={result}
+                    reset={this.state.reset}/>
             </section>
         )
     }
