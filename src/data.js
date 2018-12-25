@@ -1,4 +1,4 @@
-const theData = {
+const texts = {
     header: {
         title: 'Quizzzy'
     },
@@ -25,7 +25,14 @@ const theData = {
         title: 'Welcome on Quizzzy',
         desc: 'Choose a quiz among the categories below',
         footer: 'Swipe to see all the categories'
+    },
+    result: {
+        win: 'Your\'re a winner !',
+        mid: 'You can do better !',
+        loose: 'You lost !',
+        another: 'Come on !',
+        again: 'Let\'s see how good you are !'
     }
 }
 
-export default theData;
+export default texts;

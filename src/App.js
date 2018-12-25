@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import theData from './data'
+import texts from './data'
 import Header from './Header';
 import CategoryTile from './CategoryTile';
 import QuestionTile from './QuestionTile';
@@ -10,11 +10,11 @@ class App extends Component {
     render() {
         return (
             <section className='App'>
-                <Header data={theData}/>
-                <CategoryTile data={theData}/>
+                <Header data={texts}/>
+                <CategoryTile data={texts}/>
                 <QuestionTile/>
                 <ResultTile/>
-                <Footer data={theData}/>
+                <Footer data={texts}/>
             </section>
         )
     }

@@ -13,8 +13,8 @@ class Question extends Component {
                     onChange={this.props.onChange}
                     placeholder="duh"/>
                     <button className="QuestionTile__question__submit">OK</button>
-                    <img src={this.props.visual} alt=""/>
                 </form>
+                <img className={this.props.css} src={this.props.visual} alt=""/>
             </div>
         )
     }

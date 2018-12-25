@@ -14,9 +14,11 @@ class QuestionTile extends Component {
         result: {},
         points: 0,
         question: 1,
+        index: 0,
         reset: 0,
         answer: '',
         trueanswer: '',
+        submited: true,
         visual: wrongSVG
       }
     }
@@ -46,32 +48,39 @@ class QuestionTile extends Component {
     onSubmit = (e) => {
         e.preventDefault();
         if (this.state.answer.toLowerCase() === this.state.trueanswer.toLowerCase()) {
-            console.log(this.state.points);
             this.setState({
                 visual: correctSVG,
-                points: this.state.points + 1,
-                question: this.state.question + 1
+                points: this.state.points + 1
             })
-            console.log(this.state.points);
-            console.log(this.state.trueanswer);
             this.setState({
                 trueanswer: this.state.result.clues[this.state.question].answer
             });
-            console.log(this.state.trueanswer);
             console.log('win');
         }
-        else console.log('loose');
+        console.log('loose');
+        this.setState({
+            question: this.state.question + 1,
+            index: this.state.index + 1,
+            answer: '',
+            submited: true
+        })
+        this.setState({
+            trueanswer: this.state.result.clues[this.state.question].answer
+        });
         console.log(this.state)
     }
     onChange = (e) => {
         this.setState({
             answer: e.target.value,
+            submited: false,
             visual: wrongSVG
         })
+        console.log(this.state.trueanswer)
     }
 
     render() {
         const { error, isLoaded, result } = this.state;
+
         if (error) {
           return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
@@ -88,7 +97,9 @@ class QuestionTile extends Component {
                     onChange={this.onChange} 
                     answer={this.state.answer} 
                     visual={this.state.visual}
-                    question={this.state.question}/>
+                    question={this.state.index}
+                    css={this.state.submited ? 'showed' : 'hidden'}
+                    submited={this.state.submited}/>
                 <QuestionFooter 
                     api={result}
                     reset={this.state.reset}/>
