@@ -8,7 +8,9 @@ import texts from './data'
 
 
 let storagePoints = 0;
+let storageQuestions = 0;
 localStorage.setItem('points', storagePoints)
+localStorage.setItem('questions', storageQuestions)
 class QuestionTile extends Component {
     constructor(props) {
         super(props);
@@ -27,7 +29,7 @@ class QuestionTile extends Component {
         }
     }
     componentDidMount = () => {
-        fetch('http://jservice.io/api/category?id=78')
+        fetch('http://jservice.io/api/category?id=2537')
         .then(api => api.json())
         .then(
         (result) => {
@@ -75,6 +77,8 @@ class QuestionTile extends Component {
         this.setState({
             trueanswer: this.state.result.clues[this.state.question].answer
         });
+        storageQuestions++;
+        localStorage.setItem('questions', storageQuestions)
         console.log(this.state)
         console.log(localStorage.getItem('points'))
     }
