@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import brandSVG from './assets/imgs/brand.svg';
 import capitalSVG from './assets/imgs/capital.svg';
 import moviesSVG from './assets/imgs/movies.svg';
