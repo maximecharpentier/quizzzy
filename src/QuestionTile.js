@@ -13,9 +13,11 @@ class QuestionTile extends Component {
         isLoaded: false,
         result: {},
         points: 0,
-        visual: wrongSVG,
+        question: 1,
+        reset: 0,
         answer: '',
         trueanswer: '',
+        visual: wrongSVG
       }
     }
     componentDidMount = () => {
@@ -35,20 +37,31 @@ class QuestionTile extends Component {
                 error
             });
         })
-        .then(() => this.setState({trueanswer: this.state.result.clues[1].answer}))
+        .then(() => this.setState({
+            trueanswer: this.state.result.clues[0].answer
+        }))
         .then(() => console.log(this.state));
     }
 
     onSubmit = (e) => {
         e.preventDefault();
         if (this.state.answer.toLowerCase() === this.state.trueanswer.toLowerCase()) {
+            console.log(this.state.points);
             this.setState({
                 visual: correctSVG,
-                points: this.state.points + 1
+                points: this.state.points + 1,
+                question: this.state.question + 1
             })
+            console.log(this.state.points);
+            console.log(this.state.trueanswer);
+            this.setState({
+                trueanswer: this.state.result.clues[this.state.question].answer
+            });
+            console.log(this.state.trueanswer);
             console.log('win');
         }
         else console.log('loose');
+        console.log(this.state)
     }
     onChange = (e) => {
         this.setState({
@@ -66,14 +79,19 @@ class QuestionTile extends Component {
         } else {
           return (
             <section className="QuestionTile">
-                <QuestionHeader api={result} points={this.state.points}/>
+                <QuestionHeader 
+                api={result} points={this.state.points}
+                question={this.state.question}/>
                 <Question 
-                    submitParam={this.onSubmit} 
+                    onSubmit={this.onSubmit} 
                     api={result} 
-                    changeParam={this.onChange} 
-                    theAnswer={this.state.answer} 
-                    theVisual={this.state.visual}/>
-                <QuestionFooter api={result}/>
+                    onChange={this.onChange} 
+                    answer={this.state.answer} 
+                    visual={this.state.visual}
+                    question={this.state.question}/>
+                <QuestionFooter 
+                    api={result}
+                    reset={this.state.reset}/>
             </section>
         )
     }
