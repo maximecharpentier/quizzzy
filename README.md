@@ -2,6 +2,7 @@
 
 🧭 A 1month project for @ecolehetic, with the aim of creating an interactive story, using @react.
 > [⚛️ React scripts](https://github.com/Quizzzy/scripts.md)
+> [Instructions](https://hackmd.io/e5ffbuJyS2S2Ql19pt5XAA?fbclid=IwAR3Z43FRkVwntKyLwxWLYfjqU7r1pBndl-_el3l4ltn4yzaO3F6Kqqqd-3k)
 
 ## Run it
 
