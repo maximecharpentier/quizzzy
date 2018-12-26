@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
-import theData from './data'
+import texts from './data'
 import Header from './Header';
 import CategoryTile from './CategoryTile';
 import QuestionTile from './QuestionTile';
+import ResultTile from './ResultTile';
 import Footer from './Footer';
+
 
 class App extends Component {
     render() {
         return (
             <section className='App'>
-                <Header data={theData}/>
-                <CategoryTile data={theData}/>
+                <Header data={texts}/>
+                <CategoryTile data={texts}/>
                 <QuestionTile/>
-                <Footer data={theData}/>
+                <ResultTile/>
+                <Footer data={texts}/>
             </section>
         )
     }

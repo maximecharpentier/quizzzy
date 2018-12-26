@@ -1,50 +1,124 @@
 import React, { Component } from 'react';
+import correctSVG from './assets/imgs/correct.svg'
+import wrongSVG from './assets/imgs/false.svg'
+import QuestionHeader from './QuestionHeader';
+import QuestionFooter from './QuestionFooter';
+import Question from './Question';
+import texts from './data'
 
-class QuestionHeader extends Component {
-    render() {
-        return (
-            <header className="QuestionTile__header">
-                <span className="QuestionTile__header__counter">Question 1</span>
-                <span className="QuestionTile__header__points">00/10</span>
-            </header>
-        )
-    }
-}
 
-class QuestionFooter extends Component {
-    render() {
-        return (
-            <footer className="QuestionTile__footer">
-                <span className="QuestionTile__footer__tries">x1</span>
-                <button className="QuestionTile__footer__reset">Reset</button>
-            </footer>
-        )
-    }
-}
-
-class Question extends Component {
-    render() {
-        return (
-            <div className="QuestionTile__question">
-                <h3 className="QuestionTile__question__title">Excuse me what the fuck</h3>
-                <form className="QuestionTile__question__form">
-                    <input type="text" className="QuestionTile__question__input" placeholder="duh"/>
-                    <button className="QuestionTile__question__submit">OK</button>
-                </form>
-            </div>
-        )
-    }
-}
-
+let storagePoints = 0;
+let storageQuestions = 0;
+localStorage.setItem('points', storagePoints)
+localStorage.setItem('questions', storageQuestions)
 class QuestionTile extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            error: null,
+            isLoaded: false,
+            result: {},
+            points: 0,
+            question: 1,
+            index: 0,
+            reset: 0,
+            answer: '',
+            trueanswer: '',
+            submited: false,
+            visual: wrongSVG
+        }
+    }
+    componentDidMount = () => {
+        fetch('http://jservice.io/api/category?id=2537')
+        .then(api => api.json())
+        .then(
+        (result) => {
+            this.setState({
+                isLoaded: true,
+                result: result,
+            });
+            console.log(result)
+        },
+        (error) => {
+            this.setState({
+                isLoaded: true,
+                error
+            });
+        })
+        .then(() => this.setState({
+            trueanswer: this.state.result.clues[0].answer
+        }))
+        .then(() => console.log(this.state));
+    }
+
+    onSubmit = (e) => {
+        e.preventDefault();
+        if (this.state.answer.toLowerCase() === this.state.trueanswer.toLowerCase()) {
+            this.setState({
+                visual: correctSVG,
+                points: this.state.points + 1
+            })
+            this.setState({
+                trueanswer: this.state.result.clues[this.state.question].answer
+            });
+            storagePoints++;
+            localStorage.setItem('points', storagePoints)
+            console.log(texts)
+            console.log('win');
+
+        }
+        console.log('loose');
+        this.setState({
+            question: this.state.question + 1,
+            index: this.state.index + 1,
+            answer: '',
+            submited: true
+        })
+        this.setState({
+            trueanswer: this.state.result.clues[this.state.question].answer
+        });
+        storageQuestions++;
+        localStorage.setItem('questions', storageQuestions)
+        console.log(this.state)
+        console.log(localStorage.getItem('points'))
+    }
+    onChange = (e) => {
+        this.setState({
+            answer: e.target.value,
+            submited: false,
+            visual: wrongSVG
+        })
+        console.log(this.state.trueanswer)
+    }
+
     render() {
-        return (
+        const { error, isLoaded, result } = this.state;
+
+        if (error) {
+          return <div>Error: {error.message}</div>;
+        } else if (!isLoaded) {
+          return <div>Loading...</div>;
+        } else {
+          return (
             <section className="QuestionTile">
-                <QuestionHeader/>
-                <Question/>
-                <QuestionFooter/>
+                <QuestionHeader 
+                api={result} points={this.state.points}
+                question={this.state.question}/>
+                <Question 
+                    onSubmit={this.onSubmit} 
+                    api={result} 
+                    onChange={this.onChange} 
+                    answer={this.state.answer} 
+                    visual={this.state.visual}
+                    question={this.state.index}
+                    css={this.state.submited ? 'showed' : 'hidden'}
+                    submited={this.state.submited}/>
+                <QuestionFooter 
+                    api={result}
+                    reset={this.state.reset}/>
             </section>
         )
     }
-}
+}}
+
 export default QuestionTile;
