@@ -10,15 +10,18 @@ const texts = {
     categories: [
         {
             name: 'World Capitals',
-            url: './assets/imgs/dusk.svg'
+            url: 'http://jservice.io/api/category?id=78',
+            index: 0
         },
         {
             name: 'Brand Name',
-            url: './assets/imgs/bridge.svg'
+            url: 'http://jservice.io/api/category?id=2537',
+            index: 1
         },
         {
             name: 'Movies',
-            url: './assets/imgs/cape.svg'
+            url: 'http://jservice.io/api/category?id=21',
+            index: 2
         }
     ],
     category: {
