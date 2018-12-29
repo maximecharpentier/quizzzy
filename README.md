@@ -19,3 +19,5 @@
 - [Joe Teixera](http://joetxa.co/)
 - [Alexandre Delaloy](https://github.com/blyndusk)
 - [Maxime Charpentier](https://maximecharpentier.fr/)
+
+----
