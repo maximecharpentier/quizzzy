@@ -4,6 +4,7 @@ import globe from './assets/imgs/globe.svg'
 
 class Header extends Component {
     render() {
+        localStorage.setItem('category', 0)
         return (
             <header className="Header">
                 <img src={globe} alt={this.props.data.header.title}/>
