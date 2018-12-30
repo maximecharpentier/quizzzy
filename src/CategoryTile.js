@@ -7,18 +7,24 @@ const SVGs = [brandSVG, capitalSVG, moviesSVG];
 class CategoryTile extends Component {
     constructor(props) {
         super(props);
-        this.state = {index: 0}
+        this.state = {category: 0}
     }
-    onClick = (e) => {
-        e.preventDefault();
-        console.log('wow !');
-        if (this.state.index <=1) this.setState({index: this.state.index + 1});
-        else this.setState({index: 0});
-        console.log(this.state.index);
+    componentDidMount = () => {
+        this.categoryID = setInterval(() => this.getPoints(), 200);
+    }
+    componentWillUnmount= () => {
+        // use intervalId from the state to clear the interval
+        clearInterval(this.categoryID);
+    }
+    getPoints = () => {
+        // setState method is used to update the state
+        return this.setState({
+            category: localStorage.getItem('category')
+        })
     }
     render() {
-        let CategoryName = this.props.data.categories[this.state.index].name;
-        let CategoryUrl = SVGs[this.state.index];
+        let CategoryName = this.props.data.categories[this.state.category].name;
+        let CategoryUrl = SVGs[this.state.category];
         return (
             <section className='tile tile--category' onClick={this.onClick}>
                 <h2 className="tile__title">{this.props.data.category.title.welcome}&nbsp;<span className="bold">{this.props.data.category.title.name}</span></h2>

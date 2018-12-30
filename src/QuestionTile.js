@@ -25,11 +25,25 @@ class QuestionTile extends Component {
             answer: '',
             trueanswer: '',
             submited: false,
-            visual: wrongSVG
+            visual: wrongSVG,
+            category: 0
         }
     }
     componentDidMount = () => {
-        fetch('http://jservice.io/api/category?id=2537')
+        this.categoryID = setInterval(() => this.getPoints(), 200);
+    }
+    componentWillUnmount= () => {
+        // use intervalId from the state to clear the interval
+        clearInterval(this.categoryID);
+    }
+    getPoints = () => {
+        // setState method is used to update the state
+        return this.setState({
+            category: localStorage.getItem('category')
+        })
+    }
+    componentDidMount = () => {
+        fetch(texts.categories[this.state.category].url)
         .then(api => api.json())
         .then(
         (result) => {

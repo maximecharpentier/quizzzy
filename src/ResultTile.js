@@ -11,8 +11,8 @@ class ResultTile extends Component {
         }
     }
     componentDidMount = () => {
-        this.pointsID = setInterval(() => this.getPoints(), 1000);
-        this.questionID = setInterval(() => this.getPoints(), 1000);
+        this.pointsID = setInterval(() => this.getPoints(), 200);
+        this.questionID = setInterval(() => this.getPoints(), 200);
     }
     componentWillUnmount= () => {
         // use intervalId from the state to clear the interval
