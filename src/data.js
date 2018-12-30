@@ -3,9 +3,11 @@ const texts = {
         title: 'Quizzzy'
     },
     footer: {
-        title: 'Quizzzy 2018',
-        author: 'HÉTIC WP2020',
-        service: 'Powered by jService'
+        author: 'Hetic W2',
+        service: {
+            by: 'Powered by',
+            name: 'jService',
+        }
     },
     categories: [
         {
@@ -25,7 +27,10 @@ const texts = {
         }
     ],
     category: {
-        title: 'Welcome on Quizzzy',
+        title: {
+            welcome: 'Welcome on',
+            name: 'Quizzzy'
+        },
         desc: 'Choose a quiz among the categories below',
         footer: 'Swipe to see all the categories'
     },

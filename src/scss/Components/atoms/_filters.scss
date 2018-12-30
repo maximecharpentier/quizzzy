@@ -1,0 +1,27 @@
+.filter {
+    position: absolute;
+    top: calc(50% - 7px);
+    right: 35px;
+    &:after {
+        position: absolute;
+        top: -3px;
+        left: 100%;
+        margin-left: 4px;
+        display: inline-block;
+        content: '▾';
+        font-size: 18px;
+        color: $white;
+    }
+    &--active:after {
+        top: -1px;
+        transform: rotate(180deg);
+    }
+}
+.filter__item {
+    font-size: 14px;
+    color: $red;
+    cursor: pointer;
+    &:not(:last-child) {
+        margin-bottom: 15px;
+    }
+}

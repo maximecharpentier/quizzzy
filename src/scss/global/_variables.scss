@@ -2,16 +2,21 @@
 // GLOBAL VARIABLES
 // ==============================================
 
-// colors - rgba - linear-gradients
-$mainBackground: #1a0000;
-$mainColor: rgb(255, 251, 244);
+// Colors
+$white: #ffffff;
+$whiteSecondary: #fafafa;
+$grey: #e6e4e4;
+$greySecondary: #979696;
+$blue: #29335c;
+$yellow: #f3a712;
+$green: #008148;
+$red: #db2b39;
 
 // font-family
-$mainFont: 'Allerta Stencil', sans-serif;
+$sansSerif: 'Rubik', sans-serif;
 
-// responsive breakpoints -----------------------
-$bp-small: 576px;
-$bp-medium: 768px;
-$bp-large: 992px;
-$bp-xLarge: 1200px;
+// Responsive Breakpoints
+$smallTablet: 576px;
+$bigTablet: 768px;
+$desktop: 992px;
 

@@ -2,23 +2,26 @@
 // IMPORT GLOBAL FILES
 // ==============================================
 
-@import './global/reset';
-@import './global/variables';
-@import './global/mixins';
-@import './global/extends';
-@import './global/keyframes';
 @import './global/fonts';
+@import './global/variables';
+@import './global/animations';
+@import './global/helpers';
+@import './global/mixins';
+@import './global/reset';
 @import './global/global';
 
 // ==============================================
 // IMPORT COMPONENT FILES
 // ==============================================
 
-@import './Components/App';
-@import './Components/CategoryTile';
-@import './Components/Footer';
-@import './Components/Header';
-@import './Components/QuestionTile';
-@import './Components/ResultTile';
+// Atoms
+@import './Components/atoms/brand';
+@import './Components/atoms/filters';
 
+// Molecules
+@import './Components/molecules/footer';
+@import './Components/molecules/header';
+@import './Components/molecules/tile';
 
+// Organisms
+@import './Components/organisms/app';
