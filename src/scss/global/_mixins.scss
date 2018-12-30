@@ -1,16 +1,13 @@
-// Responsive -----------------------------------
+// Responsive
 @mixin resp($point) {
-    @if $point == 'small' {
-        @media only screen and (max-width: $bp-small) { @content; }
+    @if $point == 'smallTablet' {
+        @media only screen and (max-width: $smallTablet) { @content; }
     }
-    @else if $point == 'medium' {
-        @media only screen and (max-width: $bp-medium) { @content; }
+    @else if $point == 'bigTablet' {
+        @media only screen and (max-width: $bigTablet) { @content; }
     }
-    @else if $point == 'large' {
-        @media only screen and (max-width: $bp-large) { @content; }
-    }
-    @else if $point == 'xLarge' {
-        @media only screen and (max-width: $bp-xLarge) { @content; }
+    @else if $point == 'desktop' {
+        @media only screen and (max-width: $desktop) { @content; }
     }
 }
 
@@ -21,13 +18,13 @@
     }
     @-moz-keyframes #{$animation-name} {
         @content;
-    }  
+    }
     @-ms-keyframes #{$animation-name} {
         @content;
     }
     @-o-keyframes #{$animation-name} {
         @content;
-    }  
+    }
     @keyframes #{$animation-name} {
         @content;
     }
@@ -39,7 +36,7 @@
     -moz-animation: #{$content};
     -ms-animation: #{$content};
     -o-animation: #{$content};
-    animation: #{$content};      
+    animation: #{$content};
 }
 
 // add multibrowsers transition prefixers -------

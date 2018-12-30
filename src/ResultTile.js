@@ -6,13 +6,13 @@ class ResultTile extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            points: 0, 
+            points: 0,
             questions: 1,
         }
     }
     componentDidMount = () => {
-        this.pointsID = setInterval(() => this.getPoints(), 1000);
-        this.questionID = setInterval(() => this.getPoints(), 1000);
+        this.pointsID = setInterval(() => this.getPoints(), 200);
+        this.questionID = setInterval(() => this.getPoints(), 200);
     }
     componentWillUnmount= () => {
         // use intervalId from the state to clear the interval
@@ -44,16 +44,19 @@ class ResultTile extends Component {
     render = () => {
         if (this.state.questions >= 3) {
             return (
-                <section className="ResultTile">
-                    <img src={this.result().visual} alt="" className="ResultTile__visual"/>
-                    <h3 className="ResultTile__message">{this.result().title}</h3>
-                    <span className="ResultTile__points">0{this.state.points}/10</span>
-                    <span className="ResultTile__category">In the category: {texts.categories[0].name}</span>
-                    <span className="ResultTile__cta">{texts.result.another}<br></br> Try anopther Quiz here !</span>
+                <section className="tile tile--result">
+                    <img src={this.result().visual} alt="" className="tile__image--big"/>
+                    <h3 className="tile__title">{this.result().title}<br/>
+                        <span className="bold">0{this.state.points}/10</span>
+                    </h3>
+                    <p className="tile__info">In the category:<br/>
+                        <span className="tile__category--small">{texts.categories[0].name}</span>
+                    </p>
+                    <span className="tile__reminder">{texts.result.another}<br></br> Try anopther Quiz here !</span>
                 </section>
             )
         }
-        else return <p>result</p>
+        else return <p className="hidden">result</p>
     }
 }
 export default ResultTile;

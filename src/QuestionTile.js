@@ -25,11 +25,25 @@ class QuestionTile extends Component {
             answer: '',
             trueanswer: '',
             submited: false,
-            visual: wrongSVG
+            visual: wrongSVG,
+            category: 0
         }
     }
     componentDidMount = () => {
-        fetch('http://jservice.io/api/category?id=2537')
+        this.categoryID = setInterval(() => this.getPoints(), 200);
+    }
+    componentWillUnmount= () => {
+        // use intervalId from the state to clear the interval
+        clearInterval(this.categoryID);
+    }
+    getPoints = () => {
+        // setState method is used to update the state
+        return this.setState({
+            category: localStorage.getItem('category')
+        })
+    }
+    componentDidMount = () => {
+        fetch(texts.categories[this.state.category].url)
         .then(api => api.json())
         .then(
         (result) => {
@@ -100,20 +114,20 @@ class QuestionTile extends Component {
           return <div>Loading...</div>;
         } else {
           return (
-            <section className="QuestionTile">
-                <QuestionHeader 
+            <section className="tile tile--question">
+                <QuestionHeader
                 api={result} points={this.state.points}
                 question={this.state.question}/>
-                <Question 
-                    onSubmit={this.onSubmit} 
-                    api={result} 
-                    onChange={this.onChange} 
-                    answer={this.state.answer} 
+                <Question
+                    onSubmit={this.onSubmit}
+                    api={result}
+                    onChange={this.onChange}
+                    answer={this.state.answer}
                     visual={this.state.visual}
                     question={this.state.index}
                     css={this.state.submited ? 'showed' : 'hidden'}
                     submited={this.state.submited}/>
-                <QuestionFooter 
+                <QuestionFooter
                     api={result}
                     reset={this.state.reset}/>
             </section>

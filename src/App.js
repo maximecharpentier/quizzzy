@@ -12,9 +12,11 @@ class App extends Component {
         return (
             <section className='App'>
                 <Header data={texts}/>
-                <CategoryTile data={texts}/>
-                <QuestionTile/>
-                <ResultTile/>
+                <section className='tiles'>
+                    <CategoryTile data={texts}/>
+                    <QuestionTile/>
+                    <ResultTile/>
+                </section>
                 <Footer data={texts}/>
             </section>
         )
