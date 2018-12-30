@@ -7,7 +7,10 @@ const SVGs = [brandSVG, capitalSVG, moviesSVG];
 class CategoryTile extends Component {
     constructor(props) {
         super(props);
-        this.state = {category: 0}
+        this.state = {
+            category: 0,
+            hidden: false
+        }
     }
     componentDidMount = () => {
         this.categoryID = setInterval(() => this.getPoints(), 200);
@@ -22,11 +25,14 @@ class CategoryTile extends Component {
             category: localStorage.getItem('category')
         })
     }
+    onClick = () => {
+        this.setState({hidden: true})
+    }
     render() {
         let CategoryName = this.props.data.categories[this.state.category].name;
         let CategoryUrl = SVGs[this.state.category];
         return (
-            <section className='tile tile--category' onClick={this.onClick}>
+            <section className={this.state.hidden ? 'tile tile--category hidden' : 'tile tile--category showed'} onClick={this.onClick}>
                 <h2 className="tile__title">{this.props.data.category.title.welcome}&nbsp;<span className="bold">{this.props.data.category.title.name}</span></h2>
                 <p className="tile__info">{this.props.data.category.desc}</p>
                 <img className="tile__image" src={CategoryUrl} alt=""/>

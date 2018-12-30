@@ -110,29 +110,40 @@ class QuestionTile extends Component {
 
         if (error) {
           return <div>Error: {error.message}</div>;
-        } else if (!isLoaded) {
+        } 
+        else if (!isLoaded) {
           return <div>Loading...</div>;
-        } else {
-          return (
-            <section className="tile tile--question">
-                <QuestionHeader
-                api={result} points={this.state.points}
-                question={this.state.question}/>
-                <Question
-                    onSubmit={this.onSubmit}
-                    api={result}
-                    onChange={this.onChange}
-                    answer={this.state.answer}
-                    visual={this.state.visual}
-                    question={this.state.index}
-                    css={this.state.submited ? 'showed' : 'hidden'}
-                    submited={this.state.submited}/>
-                <QuestionFooter
-                    api={result}
-                    reset={this.state.reset}/>
-            </section>
-        )
+        } 
+        else {
+            console.log(`questions: ${this.state.question}`)
+            if (this.state.question <= 3) {
+                return (
+                    <section className="tile tile--question">
+                        <QuestionHeader
+                        api={result} points={this.state.points}
+                        question={this.state.question}/>
+                        <Question
+                            onSubmit={this.onSubmit}
+                            api={result}
+                            onChange={this.onChange}
+                            answer={this.state.answer}
+                            visual={this.state.visual}
+                            question={this.state.index}
+                            css={this.state.submited ? 'showed' : 'hidden'}
+                            submited={this.state.submited}/>
+                        <QuestionFooter
+                            api={result}
+                            reset={this.state.reset}/>
+                    </section>
+                )
+            }
+            else {
+                return (
+                <p className="hidden">result</p>
+                )
+            }
+        }
     }
-}}
+}
 
 export default QuestionTile;
