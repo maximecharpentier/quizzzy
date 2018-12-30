@@ -3,25 +3,18 @@ import globe from './assets/imgs/globe.svg'
 
 
 class Header extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            category: 0
-        }
-    }
     render() {
         return (
             <header className="Header">
                 <img src={globe} alt={this.props.data.header.title}/>
                 <h1>{this.props.data.header.title}</h1>
                 <ul className='filter'>
-                    {this.props.data.categories.map(x => <li className='filter__item'
-                        onClick={() => {
-                            localStorage.setItem('category', x.index)
-                            console.log(this.state.category)
-                        }}
+                    {this.props.data.categories.map(x => <li 
+                        className='filter__item'
+                        onClick={() => localStorage.setItem('category', x.index)}
                         key={x.name} 
-                        index={x.index}>{x.name}</li>)}
+                        index={x.index}>{x.name}
+                    </li>)}
                 </ul>
             </header>
         )
