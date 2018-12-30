@@ -7,14 +7,6 @@ import Question from './Question';
 import texts from './data'
 
 
-let storagePoints = 0;
-let storageQuestions = 1;
-let storageIndex = 0;
-let storageReset = 0;
-localStorage.setItem('points', storagePoints)
-localStorage.setItem('questions', storageQuestions)
-localStorage.setItem('index', storageIndex)
-localStorage.setItem('reset', storageReset)
 class QuestionTile extends Component {
     constructor(props) {
         super(props);
@@ -28,19 +20,20 @@ class QuestionTile extends Component {
             visual: wrongSVG,
             category: 0
         }
+        this.storagePoints = 0;
+        this.storageQuestions = 1;
+        this.storageIndex = 0;
+        this.storageReset = 0;
     }
+    componentDidMount = () => this.categoryID = setInterval(() => this.getPoints(), 200);
+    componentWillUnmount= () => clearInterval(this.categoryID);
+    getPoints = () => this.setState({category: localStorage.getItem('category')});
     componentDidMount = () => {
-        this.categoryID = setInterval(() => this.getPoints(), 200);
-    }
-    componentWillUnmount= () => {
-        clearInterval(this.categoryID);
-    }
-    getPoints = () => {
-        return this.setState({
-            category: localStorage.getItem('category')
-        })
-    }
-    componentDidMount = () => {
+        localStorage.setItem('points', this.storagePoints)
+        localStorage.setItem('questions', this.storageQuestions)
+        localStorage.setItem('index', this.storageIndex)
+        localStorage.setItem('reset', this.storageReset)
+
         fetch(texts.categories[this.state.category].url)
         .then(api => api.json())
         .then(
@@ -50,43 +43,35 @@ class QuestionTile extends Component {
                 result,
             });
             console.log(result)
-        },
-        (error) => {
-            this.setState({
+        })
+        .then(() => this.setState({trueanswer: this.state.result.clues[this.storageIndex].answer}))
+        .then((error) => {
+            return this.setState({
                 isLoaded: true,
                 error
             });
-        })
-        .then(() => this.setState({
-            trueanswer: this.state.result.clues[storageIndex].answer
-        }))
-        .then(() => console.log(this.state));
+        });
     }
-
     onSubmit = (e) => {
         e.preventDefault();
         if (this.state.answer.toLowerCase() === this.state.trueanswer.toLowerCase()) {
             this.setState({
                 visual: correctSVG,
-                trueanswer: this.state.result.clues[storageQuestions].answer
+                trueanswer: this.state.result.clues[this.storageQuestions].answer
             });
-            storagePoints++;
-            localStorage.setItem('points', storagePoints)
-            console.log(texts)
-            console.log('win');
+            this.storagePoints++;
+            localStorage.setItem('points', this.storagePoints)
 
         }
-        console.log('loose');
         this.setState({
             answer: '',
-            trueanswer: this.state.result.clues[storageQuestions].answer,
+            trueanswer: this.state.result.clues[this.storageQuestions].answer,
             submited: true
         });
-        storageQuestions++;
-        storageIndex++;
-        localStorage.setItem('questions', storageQuestions)
-        localStorage.setItem('index', storageIndex)
-        console.log(this.state)
+        this.storageQuestions++;
+        this.storageIndex++;
+        localStorage.setItem('questions', this.storageQuestions)
+        localStorage.setItem('index', this.storageIndex)
     }
     onChange = (e) => {
         this.setState({
@@ -98,22 +83,21 @@ class QuestionTile extends Component {
         console.log(this.state.trueanswer)
     }
     resetScore = () => {
-        storagePoints = 0;
-        storageQuestions = 1;
-        storageIndex = 0;
-        storageReset++;
+        this.storagePoints = 0;
+        this.storageQuestions = 1;
+        this.storageIndex = 0;
+        this.storageReset++;
         localStorage.setItem('points', 0);
         localStorage.setItem('questions', 1);
         localStorage.setItem('index', 0);
-        localStorage.setItem('reset', storageReset);
+        localStorage.setItem('reset', this.storageReset);
         this.setState({
             answer: '',
-            trueanswer: this.state.result.clues[storageIndex].answer,
+            trueanswer: this.state.result.clues[this.storageIndex].answer,
         })
     }
     render() {
         const { error, isLoaded, result } = this.state;
-
         if (error) {
           return <div>Error: {error.message}</div>;
         } 
@@ -121,31 +105,31 @@ class QuestionTile extends Component {
           return <div>Loading...</div>;
         } 
         else {
-            if (storageQuestions <= 9) {
+            if (this.storageQuestions <= 9) {
                 return (
                     <section className={this.props.style}>
                         <QuestionHeader
-                        api={result} points={storagePoints}
-                        question={storageQuestions}/>
+                            api={result} points={this.storagePoints}
+                            question={this.storageQuestions}/>
                         <Question
                             onSubmit={this.onSubmit}
                             api={result}
                             onChange={this.onChange}
                             answer={this.state.answer}
                             visual={this.state.visual}
-                            question={storageIndex}
+                            question={this.storageIndex}
                             css={this.state.submited ? 'showed' : 'hidden'}
                             submited={this.state.submited}/>
                         <QuestionFooter
                             api={result}
-                            reset={storageReset}
+                            reset={this.storageReset}
                             resetScore={this.resetScore}/>
                     </section>
                 )
             }
             else {
                 return (
-                <p className="hidden">result</p>
+                    <p className="hidden">result</p>
                 )
             }
         }
