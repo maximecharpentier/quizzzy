@@ -32,7 +32,7 @@ const texts = {
             name: 'Quizzzy'
         },
         desc: 'Choose a quiz among the categories below',
-        footer: 'Swipe to see all the categories'
+        footer: 'Click on the tile to begin'
     },
     result: {
         win: 'Your\'re a winner !',

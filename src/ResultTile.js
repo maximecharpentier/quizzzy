@@ -31,7 +31,7 @@ class ResultTile extends Component {
             visual: '',
             title: ''
         }
-        if (this.state.points <= 4) {
+        if (this.state.points <= 3) {
             result.visual = looseSVG
             result.title = texts.result.loose;
         }
@@ -42,7 +42,7 @@ class ResultTile extends Component {
         return result;
     }
     render = () => {
-        if (this.state.questions >= 3) {
+        if (this.state.questions >= 10) {
             return (
                 <section className="tile tile--result">
                     <img src={this.result().visual} alt="" className="tile__image--big"/>
@@ -52,7 +52,7 @@ class ResultTile extends Component {
                     <p className="tile__info">In the category:<br/>
                         <span className="tile__category--small">{texts.categories[0].name}</span>
                     </p>
-                    <span className="tile__reminder">{texts.result.another}<br></br> Try anopther Quiz here !</span>
+                    <span className="tile__reminder">{texts.result.another}<br></br> Try another quiz here !</span>
                 </section>
             )
         }

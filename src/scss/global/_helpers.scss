@@ -2,8 +2,8 @@
     font-weight: 500;
 }
 .showed {
-    display: flex;
+    display: flex !important;
 }
 .hidden {
-    display: none;
+    display: none !important;
 }

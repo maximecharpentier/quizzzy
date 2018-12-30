@@ -85,10 +85,13 @@
     }
 }
 .tile__category {
+    display: flex;
+    flex-direction: column;
     margin-bottom: 10px;
     font-size: 24px;
     font-weight: 500;
     color: $red;
+    cursor: pointer;
     &--small {
         font-size: 18px;
         font-weight: 500;
@@ -118,7 +121,7 @@
     border-radius: 36px;
 }
 .dots {
-    display: flex;
+    display: none;
     margin-bottom: 15px;
 }
 .dots__item {

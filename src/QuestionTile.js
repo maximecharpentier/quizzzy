@@ -8,9 +8,13 @@ import texts from './data'
 
 
 let storagePoints = 0;
-let storageQuestions = 0;
+let storageQuestions = 1;
+let storageIndex = 0;
+let storageReset = 0;
 localStorage.setItem('points', storagePoints)
 localStorage.setItem('questions', storageQuestions)
+localStorage.setItem('index', storageIndex)
+localStorage.setItem('reset', storageReset)
 class QuestionTile extends Component {
     constructor(props) {
         super(props);
@@ -18,10 +22,6 @@ class QuestionTile extends Component {
             error: null,
             isLoaded: false,
             result: {},
-            points: 0,
-            question: 1,
-            index: 0,
-            reset: 0,
             answer: '',
             trueanswer: '',
             submited: false,
@@ -33,11 +33,9 @@ class QuestionTile extends Component {
         this.categoryID = setInterval(() => this.getPoints(), 200);
     }
     componentWillUnmount= () => {
-        // use intervalId from the state to clear the interval
         clearInterval(this.categoryID);
     }
     getPoints = () => {
-        // setState method is used to update the state
         return this.setState({
             category: localStorage.getItem('category')
         })
@@ -49,7 +47,7 @@ class QuestionTile extends Component {
         (result) => {
             this.setState({
                 isLoaded: true,
-                result: result,
+                result,
             });
             console.log(result)
         },
@@ -60,7 +58,7 @@ class QuestionTile extends Component {
             });
         })
         .then(() => this.setState({
-            trueanswer: this.state.result.clues[0].answer
+            trueanswer: this.state.result.clues[storageIndex].answer
         }))
         .then(() => console.log(this.state));
     }
@@ -70,10 +68,7 @@ class QuestionTile extends Component {
         if (this.state.answer.toLowerCase() === this.state.trueanswer.toLowerCase()) {
             this.setState({
                 visual: correctSVG,
-                points: this.state.points + 1
-            })
-            this.setState({
-                trueanswer: this.state.result.clues[this.state.question].answer
+                trueanswer: this.state.result.clues[storageQuestions].answer
             });
             storagePoints++;
             localStorage.setItem('points', storagePoints)
@@ -83,18 +78,15 @@ class QuestionTile extends Component {
         }
         console.log('loose');
         this.setState({
-            question: this.state.question + 1,
-            index: this.state.index + 1,
             answer: '',
+            trueanswer: this.state.result.clues[storageQuestions].answer,
             submited: true
-        })
-        this.setState({
-            trueanswer: this.state.result.clues[this.state.question].answer
         });
         storageQuestions++;
+        storageIndex++;
         localStorage.setItem('questions', storageQuestions)
+        localStorage.setItem('index', storageIndex)
         console.log(this.state)
-        console.log(localStorage.getItem('points'))
     }
     onChange = (e) => {
         this.setState({
@@ -102,37 +94,62 @@ class QuestionTile extends Component {
             submited: false,
             visual: wrongSVG
         })
+        console.clear();
         console.log(this.state.trueanswer)
     }
-
+    resetScore = () => {
+        storagePoints = 0;
+        storageQuestions = 1;
+        storageIndex = 0;
+        storageReset++;
+        localStorage.setItem('points', 0);
+        localStorage.setItem('questions', 1);
+        localStorage.setItem('index', 0);
+        localStorage.setItem('reset', storageReset);
+        this.setState({
+            answer: '',
+            trueanswer: this.state.result.clues[storageIndex].answer,
+        })
+    }
     render() {
         const { error, isLoaded, result } = this.state;
 
         if (error) {
           return <div>Error: {error.message}</div>;
-        } else if (!isLoaded) {
+        } 
+        else if (!isLoaded) {
           return <div>Loading...</div>;
-        } else {
-          return (
-            <section className="tile tile--question">
-                <QuestionHeader
-                api={result} points={this.state.points}
-                question={this.state.question}/>
-                <Question
-                    onSubmit={this.onSubmit}
-                    api={result}
-                    onChange={this.onChange}
-                    answer={this.state.answer}
-                    visual={this.state.visual}
-                    question={this.state.index}
-                    css={this.state.submited ? 'showed' : 'hidden'}
-                    submited={this.state.submited}/>
-                <QuestionFooter
-                    api={result}
-                    reset={this.state.reset}/>
-            </section>
-        )
+        } 
+        else {
+            if (storageQuestions <= 9) {
+                return (
+                    <section className={this.props.style}>
+                        <QuestionHeader
+                        api={result} points={storagePoints}
+                        question={storageQuestions}/>
+                        <Question
+                            onSubmit={this.onSubmit}
+                            api={result}
+                            onChange={this.onChange}
+                            answer={this.state.answer}
+                            visual={this.state.visual}
+                            question={storageIndex}
+                            css={this.state.submited ? 'showed' : 'hidden'}
+                            submited={this.state.submited}/>
+                        <QuestionFooter
+                            api={result}
+                            reset={storageReset}
+                            resetScore={this.resetScore}/>
+                    </section>
+                )
+            }
+            else {
+                return (
+                <p className="hidden">result</p>
+                )
+            }
+        }
     }
-}}
+}
 
 export default QuestionTile;
