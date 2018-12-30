@@ -20,17 +20,17 @@ class CategoryTile extends Component {
         let CategoryName = this.props.data.categories[this.state.index].name;
         let CategoryUrl = SVGs[this.state.index];
         return (
-            <section className='CategoryTile' onClick={this.onClick}>
-                <h2>{this.props.data.category.title}</h2>
-                <p>{this.props.data.category.desc}</p>
-                <img src={CategoryUrl} alt=""/>
-                <h3>{CategoryName}</h3>
+            <section className='tile tile--category' onClick={this.onClick}>
+                <h2 className="tile__title">{this.props.data.category.title.welcome}&nbsp;<span className="bold">{this.props.data.category.title.name}</span></h2>
+                <p className="tile__info">{this.props.data.category.desc}</p>
+                <img className="tile__image" src={CategoryUrl} alt=""/>
+                <h3 className="tile__category">{CategoryName}</h3>
                 <div className="dots">
-                    <div className="dot"></div>
-                    <div className="dot"></div>
-                    <div className="dot"></div>
+                    <div className="dots__item"></div>
+                    <div className="dots__item"></div>
+                    <div className="dots__item"></div>
                 </div>
-                <p>{this.props.data.category.footer}</p>
+                <p className="tile__instruction">{this.props.data.category.footer}</p>
             </section>
         )
     }

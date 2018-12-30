@@ -100,20 +100,20 @@ class QuestionTile extends Component {
           return <div>Loading...</div>;
         } else {
           return (
-            <section className="QuestionTile">
-                <QuestionHeader 
+            <section className="tile tile--question">
+                <QuestionHeader
                 api={result} points={this.state.points}
                 question={this.state.question}/>
-                <Question 
-                    onSubmit={this.onSubmit} 
-                    api={result} 
-                    onChange={this.onChange} 
-                    answer={this.state.answer} 
+                <Question
+                    onSubmit={this.onSubmit}
+                    api={result}
+                    onChange={this.onChange}
+                    answer={this.state.answer}
                     visual={this.state.visual}
                     question={this.state.index}
                     css={this.state.submited ? 'showed' : 'hidden'}
                     submited={this.state.submited}/>
-                <QuestionFooter 
+                <QuestionFooter
                     api={result}
                     reset={this.state.reset}/>
             </section>
