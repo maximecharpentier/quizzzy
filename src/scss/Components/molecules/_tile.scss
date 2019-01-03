@@ -97,6 +97,9 @@
         font-weight: 500;
         color: $red;
     }
+    &:first-letter {
+        text-transform: uppercase;
+    }
 }
 .tile__question {
     margin: 0px 40px 40px 40px;
