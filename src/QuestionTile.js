@@ -4,6 +4,7 @@ import wrongSVG from './assets/imgs/false.svg'
 import QuestionHeader from './QuestionHeader';
 import QuestionFooter from './QuestionFooter';
 import Question from './Question';
+import texts from './data';
 
 let storagePoints = 0;
 let storageQuestions = 1;
@@ -17,7 +18,7 @@ class QuestionTile extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            result: {},
+            result: this.props.loaded ? this.props.apis[localStorage.getItem('category')] : texts.api,
             answer: '',
             trueanswer: '',
             submited: false,
@@ -26,13 +27,6 @@ class QuestionTile extends Component {
         }
     }
     UNSAFE_componentWillMount = () => {
-        setTimeout(() => {
-            console.log('this.props.apis')
-        console.log(this.props.apis)
-        }, 120);
-        this.setState({
-            result: JSON.parse(localStorage.getItem('result')),
-        })
         console.log(this.state.result)
     }
     componentDidMount = () => {
