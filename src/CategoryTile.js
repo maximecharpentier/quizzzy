@@ -27,7 +27,7 @@ class CategoryTile extends Component {
         this.setState({category: localStorage.getItem('category')})
     };
     render() {
-        let CategoryName = this.props.data.categories[this.state.category].name;
+        let CategoryName = this.props.loaded ? this.props.apis[this.state.category].title : this.props.data.categories[this.state.category].name;
         let CategoryUrl = SVGs[this.state.category];
         return (
             <section className={this.props.style} onClick={this.props.click}>
