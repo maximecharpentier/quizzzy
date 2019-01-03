@@ -19,15 +19,15 @@ class App extends Component {
     }
     UNSAFE_componentWillMount = () => {
         const apis = [];
-        let count = 0;
-        texts.categories.map(x => fetch(x.url)
+        texts.categories.map((x, i) => fetch(x.url)
             .then(api => api.json())
             .then(
                 result => {
                     apis.push(result);
-                    this.setState({apis: apis});
-                    count++;
-                    if (count === 3) this.setState({loaded: true});
+                    this.setState({
+                        apis: apis,
+                        loaded: i === 2 ? true : false
+                    });
                 },
                 error => console.log(error)
             )
@@ -45,12 +45,12 @@ class App extends Component {
                     apis={this.state.apis}
                 />
                 <section className='tiles'>
-                    <CategoryTile 
-                        data={texts} 
+                    <CategoryTile  
                         style={!this.state.categoryHidden ? `${this.state.categoryStyle} showed` : `${this.state.categoryStyle} hidden`} 
                         click={this.hideCategory}
                         apis={this.state.apis}
                         loaded={this.state.loaded}
+                        data={texts}
                     />
                     <QuestionTile 
                         style={this.state.categoryHidden ? `${this.state.questionStyle} showed` : `${this.state.questionStyle} hidden`} 
