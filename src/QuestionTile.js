@@ -6,14 +6,6 @@ import QuestionFooter from './QuestionFooter';
 import Question from './Question';
 import texts from './data';
 
-let storagePoints = 0;
-let storageQuestions = 1;
-let storageIndex = 0;
-let storageReset = 0;
-localStorage.setItem('points', storagePoints);
-localStorage.setItem('questions', storageQuestions);
-localStorage.setItem('index', storageIndex);
-localStorage.setItem('reset', storageReset);
 class QuestionTile extends Component {
     constructor(props) {
         super(props);
@@ -31,23 +23,22 @@ class QuestionTile extends Component {
         this.storageReset = 0;
     }
     UNSAFE_componentWillMount = () => {
-        console.log(this.state.result)
+
+        localStorage.setItem('points', this.storagePoints);
+        localStorage.setItem('questions', this.storageQuestions);
+        localStorage.setItem('index', this.storageIndex);
+        localStorage.setItem('reset', this.storageReset);
     }
-    componentDidMount = () => {
-        this.resultID = setInterval(() => this.getResult(), 200);
-        this.setState({
-            trueanswer: this.state.result.clues[storageIndex].answer
-        })
-        console.log(this.state.trueanswer)
-    };
+    componentDidMount = () => this.resultID = setInterval(() => this.getResult(), 200);
     componentWillUnmount = () => clearInterval(this.resultID);
     getResult = () => {
-        if (localStorage.getItem('default') === 'false') {
-            this.setState({
-                result: JSON.parse(localStorage.getItem('result')),
-            })
-            console.log('ok')
-        }
+        this.setState({
+            result: this.props.loaded ? this.props.apis[localStorage.getItem('category')] : texts.api,
+            trueanswer: this.state.result.clues[this.storageIndex].answer
+        })
+        // console.clear()
+        // console.log(this.state.result)
+        // console.log(this.state.trueanswer)
     };
 
     onSubmit = (e) => {
@@ -70,6 +61,7 @@ class QuestionTile extends Component {
         this.storageIndex++;
         localStorage.setItem('questions', this.storageQuestions)
         localStorage.setItem('index', this.storageIndex)
+        console.log('oui')
     }
     onChange = (e) => {
         this.setState({
@@ -95,24 +87,27 @@ class QuestionTile extends Component {
         })
     }
     render() {
-        if (storageQuestions <= 9) {
+        if (this.storageQuestions <= 9) {
             return (
                 <section className={this.props.style}>
                     <QuestionHeader
-                    api={this.state.result} points={storagePoints}
-                    question={storageQuestions}/>
+                        points={this.storagePoints}
+                        question={this.storageQuestions}/>
                     <Question
                         onSubmit={this.onSubmit}
                         api={this.state.result}
                         onChange={this.onChange}
                         answer={this.state.answer}
                         visual={this.state.visual}
-                        question={storageIndex}
+                        question={this.storageIndex}
                         css={this.state.submited ? 'showed' : 'hidden'}
-                        submited={this.state.submited}/>
+                        submited={this.state.submited}
+                        apis={this.props.apis}
+                        loaded={this.props.loaded}/>
+                        
                     <QuestionFooter
                         api={this.state.result}
-                        reset={storageReset}
+                        reset={this.storageReset}
                         resetScore={this.resetScore}/>
                 </section>
             )
