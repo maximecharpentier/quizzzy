@@ -15,7 +15,7 @@
 - [x] Afficher une question, pouvoir y répondre
 - [x] Afficher un score
   - [ ] Si 3 erreurs, le score est reset à 0
-  - [ ] Avoir la possibilité de reset notre score
+  - [x] Avoir la possibilité de reset notre score
   - [x] Si score === 10 : Afficher "T'es un winner"
 - [x] Ne jamais afficher 2 fois la même question
 - [x] Possibilité de choisir sa catégorie

@@ -1,20 +1,27 @@
 import React, { Component } from 'react';
-import globe from './assets/imgs/globe.svg'
-
+import globe from './assets/imgs/globe.svg';
+import texts from './data'
 
 class Header extends Component {
-    render() {
+    UNSAFE_componentWillMount = () => {
         localStorage.setItem('category', 0)
+        localStorage.setItem('default', true)
+        console.log('default result default')
+    }
+    render() {
         return (
             <header className="Header">
                 <img src={globe} alt={this.props.data.header.title}/>
                 <h1>{this.props.data.header.title}</h1>
                 <ul className='filter'>
-                    {this.props.data.categories.map(x => <li 
+                    {this.props.apis.map((x, i) => <li 
                         className='filter__item'
-                        onClick={() => localStorage.setItem('category', x.index)}
-                        key={x.name} 
-                        index={x.index}>{x.name}
+                        onClick={() => {
+                            localStorage.setItem('category',i);
+                            console.log(this.props.apis[localStorage.getItem('category')])
+                        }}
+                        key={x.title} 
+                        index={i}>{x.title}
                     </li>)}
                 </ul>
             </header>
