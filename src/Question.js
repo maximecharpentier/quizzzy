@@ -4,7 +4,7 @@ class Question extends Component {
     render() {
         return (
             <div className="tile__container">
-                <h3 className="tile__question">{this.props.api.clues[this.props.question].question}</h3>
+                {/* <h3 className="tile__question">{this.props.api.clues[this.props.question].question}</h3> */}
                 <form className="tile__form" onSubmit={this.props.onSubmit}>
                     <input
                     className="tile__input"

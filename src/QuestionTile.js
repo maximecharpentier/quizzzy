@@ -4,64 +4,53 @@ import wrongSVG from './assets/imgs/false.svg'
 import QuestionHeader from './QuestionHeader';
 import QuestionFooter from './QuestionFooter';
 import Question from './Question';
-import texts from './data'
-
 
 let storagePoints = 0;
 let storageQuestions = 1;
 let storageIndex = 0;
 let storageReset = 0;
-localStorage.setItem('points', storagePoints)
-localStorage.setItem('questions', storageQuestions)
-localStorage.setItem('index', storageIndex)
-localStorage.setItem('reset', storageReset)
+localStorage.setItem('points', storagePoints);
+localStorage.setItem('questions', storageQuestions);
+localStorage.setItem('index', storageIndex);
+localStorage.setItem('reset', storageReset);
 class QuestionTile extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            error: null,
-            isLoaded: false,
             result: {},
             answer: '',
             trueanswer: '',
             submited: false,
             visual: wrongSVG,
-            category: 0
+            default: false
         }
     }
-    componentDidMount = () => {
-        this.categoryID = setInterval(() => this.getPoints(), 200);
-    }
-    componentWillUnmount= () => {
-        clearInterval(this.categoryID);
-    }
-    getPoints = () => {
-        return this.setState({
-            category: localStorage.getItem('category')
+    UNSAFE_componentWillMount = () => {
+        setTimeout(() => {
+            console.log('this.props.apis')
+        console.log(this.props.apis)
+        }, 120);
+        this.setState({
+            result: JSON.parse(localStorage.getItem('result')),
         })
+        console.log(this.state.result)
     }
     componentDidMount = () => {
-        fetch(texts.categories[this.state.category].url)
-        .then(api => api.json())
-        .then(
-        (result) => {
-            this.setState({
-                isLoaded: true,
-                result,
-            });
-            console.log(result)
-        },
-        (error) => {
-            this.setState({
-                isLoaded: true,
-                error
-            });
-        })
-        .then(() => this.setState({
+        this.resultID = setInterval(() => this.getResult(), 200);
+        this.setState({
             trueanswer: this.state.result.clues[storageIndex].answer
-        }))
-        .then(() => console.log(this.state));
-    }
+        })
+        console.log(this.state.trueanswer)
+    };
+    componentWillUnmount = () => clearInterval(this.resultID);
+    getResult = () => {
+        if (localStorage.getItem('default') === 'false') {
+            this.setState({
+                result: JSON.parse(localStorage.getItem('result')),
+            })
+            console.log('ok')
+        }
+    };
 
     onSubmit = (e) => {
         e.preventDefault();
@@ -72,11 +61,7 @@ class QuestionTile extends Component {
             });
             storagePoints++;
             localStorage.setItem('points', storagePoints)
-            console.log(texts)
-            console.log('win');
-
         }
-        console.log('loose');
         this.setState({
             answer: '',
             trueanswer: this.state.result.clues[storageQuestions].answer,
@@ -86,7 +71,6 @@ class QuestionTile extends Component {
         storageIndex++;
         localStorage.setItem('questions', storageQuestions)
         localStorage.setItem('index', storageIndex)
-        console.log(this.state)
     }
     onChange = (e) => {
         this.setState({
@@ -112,42 +96,32 @@ class QuestionTile extends Component {
         })
     }
     render() {
-        const { error, isLoaded, result } = this.state;
-
-        if (error) {
-          return <div>Error: {error.message}</div>;
-        } 
-        else if (!isLoaded) {
-          return <div>Loading...</div>;
-        } 
+        if (storageQuestions <= 9) {
+            return (
+                <section className={this.props.style}>
+                    <QuestionHeader
+                    api={this.state.result} points={storagePoints}
+                    question={storageQuestions}/>
+                    <Question
+                        onSubmit={this.onSubmit}
+                        api={this.state.result}
+                        onChange={this.onChange}
+                        answer={this.state.answer}
+                        visual={this.state.visual}
+                        question={storageIndex}
+                        css={this.state.submited ? 'showed' : 'hidden'}
+                        submited={this.state.submited}/>
+                    <QuestionFooter
+                        api={this.state.result}
+                        reset={storageReset}
+                        resetScore={this.resetScore}/>
+                </section>
+            )
+        }
         else {
-            if (storageQuestions <= 9) {
-                return (
-                    <section className={this.props.style}>
-                        <QuestionHeader
-                        api={result} points={storagePoints}
-                        question={storageQuestions}/>
-                        <Question
-                            onSubmit={this.onSubmit}
-                            api={result}
-                            onChange={this.onChange}
-                            answer={this.state.answer}
-                            visual={this.state.visual}
-                            question={storageIndex}
-                            css={this.state.submited ? 'showed' : 'hidden'}
-                            submited={this.state.submited}/>
-                        <QuestionFooter
-                            api={result}
-                            reset={storageReset}
-                            resetScore={this.resetScore}/>
-                    </section>
-                )
-            }
-            else {
-                return (
-                <p className="hidden">result</p>
-                )
-            }
+            return (
+            <p className="hidden">result</p>
+            )
         }
     }
 }

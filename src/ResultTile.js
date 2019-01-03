@@ -31,7 +31,7 @@ class ResultTile extends Component {
             visual: '',
             title: ''
         }
-        if (this.state.points <= 3) {
+        if (this.state.points <= 5) {
             result.visual = looseSVG
             result.title = texts.result.loose;
         }
