@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import globe from './assets/imgs/globe.svg';
-import texts from './data'
 
 class Header extends Component {
     UNSAFE_componentWillMount = () => {
