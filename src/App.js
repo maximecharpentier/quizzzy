@@ -55,6 +55,7 @@ class App extends Component {
                     <QuestionTile 
                         style={this.state.categoryHidden ? `${this.state.questionStyle} showed` : `${this.state.questionStyle} hidden`} 
                         apis={this.state.apis}
+                        loaded={this.state.loaded}
                     />
                     <ResultTile/>
                 </section>
