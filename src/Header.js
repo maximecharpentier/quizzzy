@@ -6,15 +6,7 @@ class Header extends Component {
     UNSAFE_componentWillMount = () => {
         localStorage.setItem('category', 0)
         localStorage.setItem('default', true)
-        fetch(texts.categories[localStorage.getItem('category')].url)
-        .then(api => api.json())
-        .then(
-            result => {
-                localStorage.setItem('result', JSON.stringify(result))
-                console.log('default result default')
-            },
-            error => console.log(error)
-        )
+        console.log('default result default')
     }
     render() {
         return (
@@ -22,14 +14,14 @@ class Header extends Component {
                 <img src={globe} alt={this.props.data.header.title}/>
                 <h1>{this.props.data.header.title}</h1>
                 <ul className='filter'>
-                    {this.props.apis.map(x => <li 
+                    {this.props.apis.map((x, i) => <li 
                         className='filter__item'
                         onClick={() => {
-                            localStorage.setItem('category', x.index)
-                    
+                            localStorage.setItem('category',i);
+                            console.log(this.props.apis[localStorage.getItem('category')])
                         }}
                         key={x.title} 
-                        index={x}>{x.title}
+                        index={i}>{x.title}
                     </li>)}
                 </ul>
             </header>
