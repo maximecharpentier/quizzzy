@@ -11,8 +11,10 @@ class App extends Component {
         super(props);
         this.state = {
             categoryHidden: false,
+            resultHidden: false,
             categoryStyle: 'tile tile__category',
             questionStyle: 'tile tile__question',
+            resultStyle: 'tile tile--result',
             apis: [],
             loaded: false
         }
@@ -35,7 +37,20 @@ class App extends Component {
         
     }
     hideCategory = () => {
-       return this.setState({categoryHidden: true})
+       return this.setState({
+            resultHidden: false,
+            categoryHidden: true
+        })
+    }
+    hideResults = () => {
+        localStorage.setItem('points', 0);
+        localStorage.setItem('questions', 1);
+        localStorage.setItem('index', 0);
+        return this.setState({
+            resultHidden: true,
+            categoryHidden: false
+        })
+
     }
     render() {
         return (
@@ -57,7 +72,10 @@ class App extends Component {
                         apis={this.state.apis}
                         loaded={this.state.loaded}
                     />
-                    <ResultTile/>
+                    <ResultTile
+                        style={!this.state.resultHidden ? `${this.state.resultStyle} showed` : `${this.state.resultStyle} hidden`} 
+                        click={this.hideResults}
+                    />
                 </section>
                 <Footer data={texts}/>
             </section>

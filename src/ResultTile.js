@@ -44,7 +44,7 @@ class ResultTile extends Component {
     render = () => {
         if (this.state.questions >= 10) {
             return (
-                <section className="tile tile--result">
+                <section className={this.props.style} onClick={this.props.click}>
                     <img src={this.result().visual} alt="" className="tile__image--big"/>
                     <h3 className="tile__title">{this.result().title}<br/>
                         <span className="bold">0{this.state.points}/10</span>
