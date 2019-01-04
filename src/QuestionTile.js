@@ -21,6 +21,7 @@ class QuestionTile extends Component {
         this.storageQuestions = 1;
         this.storageIndex = 0;
         this.storageReset = 0;
+        this.storageErrors = 0;
     }
     UNSAFE_componentWillMount = () => {
 
@@ -28,6 +29,7 @@ class QuestionTile extends Component {
         localStorage.setItem('questions', this.storageQuestions);
         localStorage.setItem('index', this.storageIndex);
         localStorage.setItem('reset', this.storageReset);
+        localStorage.setItem('errors', this.storageErrors);
     }
     componentDidMount = () => this.resultID = setInterval(() => this.getResult(), 200);
     componentWillUnmount = () => clearInterval(this.resultID);
@@ -52,6 +54,10 @@ class QuestionTile extends Component {
             localStorage.setItem('points', this.storagePoints)
 
         }
+        else {
+            this.storageErrors++;
+            localStorage.setItem('errors', this.storageErrors) 
+        }
         this.setState({
             answer: '',
             trueanswer: this.state.result.clues[this.storageQuestions].answer,
@@ -62,6 +68,20 @@ class QuestionTile extends Component {
         localStorage.setItem('questions', this.storageQuestions)
         localStorage.setItem('index', this.storageIndex)
         console.log('oui')
+        if (this.storageErrors === 3) {
+            this.storagePoints = 0;
+            this.storageQuestions = 1;
+            this.storageIndex = 0;
+            this.storageErrors = 0;
+            localStorage.setItem('points', 0);
+            localStorage.setItem('questions', 1);
+            localStorage.setItem('index', 0);
+            localStorage.setItem('errors', 0);
+            this.setState({
+                answer: '',
+                trueanswer: this.state.result.clues[this.storageIndex].answer,
+            })
+        }
     }
     onChange = (e) => {
         this.setState({
