@@ -1,0 +1,21 @@
+{
+  "main.css": "/quizzzy/static/css/main.b3871a6f.chunk.css",
+  "main.js": "/quizzzy/static/js/main.7face147.chunk.js",
+  "main.js.map": "/quizzzy/static/js/main.7face147.chunk.js.map",
+  "static/js/1.2e8aeaab.chunk.js": "/quizzzy/static/js/1.2e8aeaab.chunk.js",
+  "static/js/1.2e8aeaab.chunk.js.map": "/quizzzy/static/js/1.2e8aeaab.chunk.js.map",
+  "runtime~main.js": "/quizzzy/static/js/runtime~main.88ede40d.js",
+  "runtime~main.js.map": "/quizzzy/static/js/runtime~main.88ede40d.js.map",
+  "static/media/false.svg": "/quizzzy/static/media/false.185884df.svg",
+  "static/media/brand.svg": "/quizzzy/static/media/brand.b6da3589.svg",
+  "static/media/capital.svg": "/quizzzy/static/media/capital.8149793e.svg",
+  "static/media/movies.svg": "/quizzzy/static/media/movies.08c5768c.svg",
+  "static/media/correct.svg": "/quizzzy/static/media/correct.f821db6c.svg",
+  "static/media/winner.svg": "/quizzzy/static/media/winner.b1c117ac.svg",
+  "static/media/looser.svg": "/quizzzy/static/media/looser.f9b5a40e.svg",
+  "static/media/globe.svg": "/quizzzy/static/media/globe.d5bf6ebc.svg",
+  "static/css/main.b3871a6f.chunk.css.map": "/quizzzy/static/css/main.b3871a6f.chunk.css.map",
+  "index.html": "/quizzzy/index.html",
+  "precache-manifest.3aa0bc4e269d62c8fb2257e451d567c3.js": "/quizzzy/precache-manifest.3aa0bc4e269d62c8fb2257e451d567c3.js",
+  "service-worker.js": "/quizzzy/service-worker.js"
+}
