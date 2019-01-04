@@ -8,6 +8,10 @@ class ResultTile extends Component {
         this.state = {
             points: 0,
             questions: 1,
+            message: {
+                visual: '',
+                title: ''
+            }
         }
     }
     componentDidMount = () => {
@@ -15,38 +19,27 @@ class ResultTile extends Component {
         this.questionID = setInterval(() => this.getPoints(), 200);
     }
     componentWillUnmount= () => {
-        // use intervalId from the state to clear the interval
         clearInterval(this.pointsID);
         clearInterval(this.questionID);
     }
     getPoints = () => {
-        // setState method is used to update the state
         return this.setState({
             points: localStorage.getItem('points'),
             questions: localStorage.getItem('questions')
         })
     }
-    result = () => {
-        const result = {
-            visual: '',
-            title: ''
-        }
-        if (this.state.points <= 5) {
-            result.visual = looseSVG
-            result.title = texts.result.loose;
-        }
-        else {
-            result.visual = winSVG
-            result.title = texts.result.win;
-        }
-        return result;
+    UNSAFE_componentWillMount = () => {
+        this.setState({message: {
+            visual: this.state.points <= 5 ? looseSVG : winSVG,
+            title: this.state.points <= 5 ? texts.result.loose : texts.result.win
+        }})
     }
     render = () => {
         if (this.state.questions >= 10) {
             return (
-                <section className={this.props.style} onClick={this.props.click}>
-                    <img src={this.result().visual} alt="" className="tile__image--big"/>
-                    <h3 className="tile__title">{this.result().title}<br/>
+                <section className={this.props.style} onClick={this.props.goBack}>
+                    <img src={this.state.message.visual} alt="" className="tile__image--big"/>
+                    <h3 className="tile__title">{this.state.message.title}<br/>
                         <span className="bold">0{this.state.points}/10</span>
                     </h3>
                     <p className="tile__info">In the category:<br/>

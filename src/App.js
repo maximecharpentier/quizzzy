@@ -16,7 +16,7 @@ class App extends Component {
             questionStyle: 'tile tile__question',
             resultStyle: 'tile tile--result',
             apis: [],
-            loaded: false
+            isLoaded: false
         }
     }
     UNSAFE_componentWillMount = () => {
@@ -28,10 +28,10 @@ class App extends Component {
                     apis.push(result);
                     this.setState({
                         apis: apis,
-                        loaded: i === 2 ? true : false
+                        isLoaded: i === texts.categories.length - 1 ? true : false
                     });
                 },
-                error => console.log(error)
+                error => console.error(error)
             )
         )
         
@@ -62,19 +62,19 @@ class App extends Component {
                 <section className='tiles'>
                     <CategoryTile  
                         style={!this.state.categoryHidden ? `${this.state.categoryStyle} showed` : `${this.state.categoryStyle} hidden`} 
-                        click={this.hideCategory}
+                        hideCategory={this.hideCategory}
                         apis={this.state.apis}
-                        loaded={this.state.loaded}
+                        isLoaded={this.state.isLoaded}
                         data={texts}
                     />
                     <QuestionTile 
                         style={this.state.categoryHidden ? `${this.state.questionStyle} showed` : `${this.state.questionStyle} hidden`} 
                         apis={this.state.apis}
-                        loaded={this.state.loaded}
+                        isLoaded={this.state.isLoaded}
                     />
                     <ResultTile
                         style={!this.state.resultHidden ? `${this.state.resultStyle} showed` : `${this.state.resultStyle} hidden`} 
-                        click={this.hideResults}
+                        goBack={this.hideResults}
                     />
                 </section>
                 <Footer data={texts}/>

@@ -2,11 +2,8 @@ import React, { Component } from 'react';
 import globe from './assets/imgs/globe.svg';
 
 class Header extends Component {
-    UNSAFE_componentWillMount = () => {
-        localStorage.setItem('category', 0)
-        localStorage.setItem('default', true)
-        console.log('default result default')
-    }
+    UNSAFE_componentWillMount = () => localStorage.setItem('category', 0);
+    updateCategory = (i) => localStorage.setItem('category',i)
     render() {
         return (
             <header className="Header">
@@ -15,10 +12,7 @@ class Header extends Component {
                 <ul className='filter'>
                     {this.props.apis.map((x, i) => <li 
                         className='filter__item'
-                        onClick={() => {
-                            localStorage.setItem('category',i);
-                            console.log(this.props.apis[localStorage.getItem('category')])
-                        }}
+                        onClick={() => this.updateCategory(i)}
                         key={x.title} 
                         index={i}>{x.title}
                     </li>)}
