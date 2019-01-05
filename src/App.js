@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import texts from './data'
+import Loader from './Loader'
 import Header from './Header';
 import CategoryTile from './CategoryTile';
 import QuestionTile from './QuestionTile';
@@ -15,6 +16,7 @@ class App extends Component {
             categoryStyle: 'tile tile__category',
             questionStyle: 'tile tile__question',
             resultStyle: 'tile tile--result',
+            loaderStyle: 'Loader',
             apis: [],
             isLoaded: false
         }
@@ -55,6 +57,7 @@ class App extends Component {
     render() {
         return (
             <section className='App'>
+                <Loader style={this.state.isLoaded ? `${this.state.loaderStyle} invisible` : `${this.state.loaderStyle} showed`}/>
                 <Header 
                     data={texts} 
                     apis={this.state.apis}
