@@ -4,8 +4,8 @@ self.__precacheManifest = [
     "url": "/quizzzy/static/media/brand.b6da3589.svg"
   },
   {
-    "revision": "7face1478fe65c4abeb6",
-    "url": "/quizzzy/static/css/main.b3871a6f.chunk.css"
+    "revision": "c4dd93517c306260f844",
+    "url": "/quizzzy/static/css/main.65b9fc01.chunk.css"
   },
   {
     "revision": "2e8aeaab1227158c8427",
@@ -24,8 +24,8 @@ self.__precacheManifest = [
     "url": "/quizzzy/static/media/globe.d5bf6ebc.svg"
   },
   {
-    "revision": "7face1478fe65c4abeb6",
-    "url": "/quizzzy/static/js/main.7face147.chunk.js"
+    "revision": "c4dd93517c306260f844",
+    "url": "/quizzzy/static/js/main.c4dd9351.chunk.js"
   },
   {
     "revision": "8149793e4f9c7681419fb8b3df82a774",
@@ -48,7 +48,7 @@ self.__precacheManifest = [
     "url": "/quizzzy/static/media/looser.f9b5a40e.svg"
   },
   {
-    "revision": "054238740d1a7de934a3231317454bbb",
+    "revision": "04085fd06919b05aa6d2828f6d5755b2",
     "url": "/quizzzy/index.html"
   }
 ];
