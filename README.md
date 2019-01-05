@@ -7,7 +7,8 @@
 ## Run it
 
 - Install all dependencies: `yarn` or `npm i`
-- At the root of the repo, in 2 different command line: `yarn start` & `gulp`
+- Generate the CSS with `gulp scss`
+- Generate the project with `yarn start` or `npm run start`
 
 ## Features
 
@@ -29,7 +30,7 @@
 
 - [World Capitals](http://jservice.io/popular/78?fbclid=IwAR1cZbZ8SxSioH7mb77pL5NTMMgQfrTckuq_bIHJGyjcd2pwb2T5ooXMsek)
 - [Brand Names](http://jservice.io/popular/2537?fbclid=IwAR3ueaQeuPYUVx_F9OwJZfqoVlugb-NL2MXWfF4zQTBJh2G5_rg1mr8ffJI)
-- [The Movies](http://jservice.io/popular/309?fbclid=IwAR3ueaQeuPYUVx_F9OwJZfqoVlugb-NL2MXWfF4zQTBJh2G5_rg1mr8ffJI)
+- [Animals](http://jservice.io/popular/21?fbclid=IwAR3ueaQeuPYUVx_F9OwJZfqoVlugb-NL2MXWfF4zQTBJh2G5_rg1mr8ffJI)
 
 ## Technos
 
