@@ -29,17 +29,17 @@ const texts = {
     },
     categories: [
         {
-            name: 'World Capitals',
+            name: 'DEFAULT_CATEGORY',
             url: 'http://jservice.io/api/category?id=78',
             index: 0
         },
         {
-            name: 'Brand Name',
+            name: 'DEFAULT_CATEGORY',
             url: 'http://jservice.io/api/category?id=2537',
             index: 1
         },
         {
-            name: 'Movies',
+            name: 'DEFAULT_CATEGORY',
             url: 'http://jservice.io/api/category?id=21',
             index: 2
         }

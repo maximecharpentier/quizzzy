@@ -10,7 +10,7 @@ class QuestionTile extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            result: this.props.loaded ? this.props.apis[localStorage.getItem('category')] : texts.api,
+            result: this.props.isLoaded ? this.props.apis[localStorage.getItem('category')] : texts.api,
             answer: '',
             trueanswer: '',
             submited: false,
@@ -35,7 +35,7 @@ class QuestionTile extends Component {
     componentWillUnmount = () => clearInterval(this.resultID);
     getResult = () => {
         this.setState({
-            result: this.props.loaded ? this.props.apis[localStorage.getItem('category')] : texts.api,
+            result: this.props.isLoaded ? this.props.apis[localStorage.getItem('category')] : texts.api,
             trueanswer: this.state.result.clues[this.storageIndex].answer
         })
         // console.clear()
@@ -123,7 +123,7 @@ class QuestionTile extends Component {
                         css={this.state.submited ? 'showed' : 'hidden'}
                         submited={this.state.submited}
                         apis={this.props.apis}
-                        loaded={this.props.loaded}/>
+                        isLoaded={this.props.isLoaded}/>
                         
                     <QuestionFooter
                         api={this.state.result}

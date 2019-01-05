@@ -3,38 +3,33 @@ import brandSVG from './assets/imgs/brand.svg';
 import capitalSVG from './assets/imgs/capital.svg';
 import moviesSVG from './assets/imgs/movies.svg';
 
-// localStorage.setItem('result', JSON.stringify({result: 'result'}))
-const SVGs = [brandSVG, capitalSVG, moviesSVG];
 class CategoryTile extends Component {
     constructor(props) {
         super(props);
         this.state = {
             category: 0,
             apis: this.props.apis,
-            loaded: this.props.loaded
+            isLoaded: this.props.isLoaded,
+            SVGs: [brandSVG, capitalSVG, moviesSVG]
         }
+
+        this.CategoryName = this.props.data.categories[this.state.category].name;
+        this.CategoryUrl = this.state.SVGs[this.state.category];
     }
-    componentDidMount = () => {
-        this.categoryID = setInterval(() => this.getCategory(), 200);
-        console.log(this.state.loaded)
-        console.log(this.state.apis)
-        if (this.props.loaded) {
-            console.log(this.props.apis)
-        }
-    };
-    componentWillUnmount = () => clearInterval(this.categoryID);
-    getCategory = () => {
-        this.setState({category: localStorage.getItem('category')})
-    };
+    componentDidMount = () => this.categoryID = setInterval(() => this.getCategory(), 200);
+    UNSAFE_componentWillMount = () => clearInterval(this.categoryID);
+    UNSAFE_componentWillUpdate = () => {
+        this.CategoryName = this.props.isLoaded ? this.props.apis[this.state.category].title : this.props.data.categories[this.state.category].name;
+        this.CategoryUrl = this.state.SVGs[this.state.category];
+    }
+    getCategory = () => this.setState({category: localStorage.getItem('category')});
     render() {
-        let CategoryName = this.props.loaded ? this.props.apis[this.state.category].title : this.props.data.categories[this.state.category].name;
-        let CategoryUrl = SVGs[this.state.category];
         return (
-            <section className={this.props.style} onClick={this.props.click}>
+            <section className={this.props.style} onClick={this.props.hideCategory}>
                 <h2 className="tile__title">{this.props.data.category.title.welcome}&nbsp;<span className="bold">{this.props.data.category.title.name}</span></h2>
                 <p className="tile__info">{this.props.data.category.desc}</p>
-                <img className="tile__image" src={CategoryUrl} alt=""/>
-                <h3 className="tile__category">{CategoryName}</h3>
+                <img className="tile__image" src={this.CategoryUrl} alt=""/>
+                <h3 className="tile__category">{this.CategoryName}</h3>
                 <p className="tile__instruction">{this.props.data.category.footer}</p>
             </section>
         )
