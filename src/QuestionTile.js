@@ -25,10 +25,15 @@ class QuestionTile extends Component {
     }
     UNSAFE_componentWillMount = () => {
 
+        // if (!localStorage.getItem('points')) 
         localStorage.setItem('points', this.storagePoints);
+        //if (!localStorage.getItem('questions')) 
         localStorage.setItem('questions', this.storageQuestions);
+        // if (!localStorage.getItem('index')) 
         localStorage.setItem('index', this.storageIndex);
+        // if (!localStorage.getItem('reset')) 
         localStorage.setItem('reset', this.storageReset);
+        // if (!localStorage.getItem('errors')) 
         localStorage.setItem('errors', this.storageErrors);
     }
     componentDidMount = () => this.resultID = setInterval(() => this.getResult(), 200);
@@ -64,11 +69,11 @@ class QuestionTile extends Component {
         this.storageIndex++;
         localStorage.setItem('questions', this.storageQuestions)
         localStorage.setItem('index', this.storageIndex)
-        if (this.storageErrors >= 2) {
+        if (this.storageErrors === 3) {
             this.errors();
             this.props.loose();
          }
-         if (this.storagePoints >= 4) {
+         if (this.storageIndex === 9) {
             this.props.loose();
          }
         console.log(this.storageErrors)

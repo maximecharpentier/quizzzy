@@ -25,7 +25,10 @@ class App extends Component {
             isLoaded: false
         }
     }
-    UNSAFE_componentWillMount = () => this.loadAPis();
+    UNSAFE_componentWillMount = () => {
+        this.loadAPis();
+        // if (localStorage.getItem('points')) this.hideCategory();
+    };
     loadAPis = () => {
         const apis = [];
         let count = 0
