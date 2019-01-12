@@ -12,10 +12,14 @@ class App extends Component {
         super(props);
         this.state = {
             categoryHidden: false,
-            resultHidden: false,
             categoryStyle: 'tile tile__category',
-            questionStyle: 'tile tile__question',
+            categoryHiddenStyle: 'tile tile__category hidden',
+            resultHidden: true,
             resultStyle: 'tile tile--result',
+            resultHiddenStyle: 'tile tile--result hidden',
+            questionsHidden: true,
+            questionStyle: 'tile tile__question',
+            questionHiddenStyle: 'tile tile__question hidden',
             loaderStyle: 'Loader',
             apis: [],
             isLoaded: false
@@ -23,15 +27,18 @@ class App extends Component {
     }
     UNSAFE_componentWillMount = () => {
         const apis = [];
+        let count = 0
         texts.categories.map((x, i) => fetch(x.url)
             .then(api => api.json())
             .then(
                 result => {
+                    count++;
                     apis.push(result);
                     this.setState({
                         apis: apis,
-                        isLoaded: i === texts.categories.length - 1 ? true : false
+                        isLoaded: count === texts.categories.length ? true : false
                     });
+                    console.log(count)
                 },
                 error => console.error(error)
             )
@@ -40,8 +47,14 @@ class App extends Component {
     }
     hideCategory = () => {
        return this.setState({
-            resultHidden: false,
-            categoryHidden: true
+            categoryHidden: true,
+            questionsHidden: false
+        })
+    }
+    hideQuestions = () => {
+        return this.setState({
+            questionsHidden: true,
+            resultHidden: false
         })
     }
     hideResults = () => {
@@ -54,6 +67,7 @@ class App extends Component {
         })
 
     }
+    wow = () => alert('wow')
     render() {
         return (
             <section className='App'>
@@ -64,20 +78,21 @@ class App extends Component {
                 />
                 <section className='tiles'>
                     <CategoryTile  
-                        style={!this.state.categoryHidden ? `${this.state.categoryStyle} showed` : `${this.state.categoryStyle} hidden`} 
-                        hideCategory={this.hideCategory}
+                        style={this.state.categoryHidden ? this.state.categoryHiddenStyle : this.state.categoryStyle} 
+                        click={this.hideCategory}
                         apis={this.state.apis}
                         isLoaded={this.state.isLoaded}
                         data={texts}
                     />
                     <QuestionTile 
-                        style={this.state.categoryHidden ? `${this.state.questionStyle} showed` : `${this.state.questionStyle} hidden`} 
+                        style={this.state.questionsHidden ? this.state.questionHiddenStyle : this.state.questionStyle} 
                         apis={this.state.apis}
                         isLoaded={this.state.isLoaded}
+                        loose={this.hideQuestions}
                     />
                     <ResultTile
-                        style={!this.state.resultHidden ? `${this.state.resultStyle} showed` : `${this.state.resultStyle} hidden`} 
-                        goBack={this.hideResults}
+                        style={this.state.resultHidden ? this.state.resultHiddenStyle : this.state.resultStyle}
+                        click={this.hideResults}
                     />
                 </section>
                 <Footer data={texts}/>

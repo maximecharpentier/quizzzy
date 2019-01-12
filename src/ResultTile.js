@@ -35,9 +35,8 @@ class ResultTile extends Component {
         }})
     }
     render = () => {
-        if (this.state.questions >= 10) {
             return (
-                <section className={this.props.style} onClick={this.props.goBack}>
+                <section className={this.props.style} onClick={this.props.click}>
                     <img src={this.state.message.visual} alt="" className="tile__image--big"/>
                     <h3 className="tile__title">{this.state.message.title}<br/>
                         <span className="bold">0{this.state.points}/10</span>
@@ -48,8 +47,6 @@ class ResultTile extends Component {
                     <span className="tile__reminder">{texts.result.another}<br></br> Try another quiz here !</span>
                 </section>
             )
-        }
-        else return <p className="hidden">result</p>
     }
 }
 export default ResultTile;
