@@ -65,9 +65,12 @@ class QuestionTile extends Component {
         localStorage.setItem('questions', this.storageQuestions)
         localStorage.setItem('index', this.storageIndex)
         if (this.storageErrors >= 2) {
-           this.errors();
-           this.props.loose();
-        }
+            this.errors();
+            this.props.loose();
+         }
+         if (this.storagePoints >= 4) {
+            this.props.loose();
+         }
         console.log(this.storageErrors)
     }
 

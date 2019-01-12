@@ -25,7 +25,8 @@ class App extends Component {
             isLoaded: false
         }
     }
-    UNSAFE_componentWillMount = () => {
+    UNSAFE_componentWillMount = () => this.loadAPis();
+    loadAPis = () => {
         const apis = [];
         let count = 0
         texts.categories.map((x, i) => fetch(x.url)
@@ -38,12 +39,10 @@ class App extends Component {
                         apis: apis,
                         isLoaded: count === texts.categories.length ? true : false
                     });
-                    console.log(count)
                 },
                 error => console.error(error)
             )
         )
-        
     }
     hideCategory = () => {
        return this.setState({
@@ -93,6 +92,9 @@ class App extends Component {
                     <ResultTile
                         style={this.state.resultHidden ? this.state.resultHiddenStyle : this.state.resultStyle}
                         click={this.hideResults}
+                        isLoaded={this.state.isLoaded}
+                        apis={this.state.apis}
+                        data={texts}
                     />
                 </section>
                 <Footer data={texts}/>
