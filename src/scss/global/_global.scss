@@ -24,7 +24,6 @@ body {
         left: 50%;
         transform: translate(-50%,-50%);
         &__line {
-            stroke: orangered;
             stroke-width: 4;
             stroke-dashoffset: 500;
         }
