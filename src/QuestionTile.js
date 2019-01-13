@@ -4,13 +4,13 @@ import wrongSVG from './assets/imgs/false.svg'
 import QuestionHeader from './QuestionHeader';
 import QuestionFooter from './QuestionFooter';
 import Question from './Question';
-import texts from './data';
+import data from './data';
 
 class QuestionTile extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            result: this.props.isLoaded ? this.props.apis[localStorage.getItem('category')] : texts.api,
+            result: this.props.isLoaded ? this.props.apis[localStorage.getItem('category')] : data.api,
             answer: '',
             trueanswer: '',
             submited: false,
@@ -40,7 +40,7 @@ class QuestionTile extends Component {
     componentWillUnmount = () => clearInterval(this.resultID);
     getResult = () => {
         this.setState({
-            result: this.props.isLoaded ? this.props.apis[localStorage.getItem('category')] : texts.api,
+            result: this.props.isLoaded ? this.props.apis[localStorage.getItem('category')].result : data.api,
             trueanswer: this.state.result.clues[this.storageIndex].answer
         })
     };
@@ -106,10 +106,12 @@ class QuestionTile extends Component {
         this.storagePoints = 0;
         this.storageQuestions = 1;
         this.storageIndex = 0;
+        this.storageErrors = 0;
         this.storageReset++;
         localStorage.setItem('points', 0);
         localStorage.setItem('questions', 1);
         localStorage.setItem('index', 0);
+        localStorage.setItem('errors', 0)
         localStorage.setItem('reset', this.storageReset);
         this.setState({
             answer: '',
@@ -132,7 +134,8 @@ class QuestionTile extends Component {
                         css={this.state.submited ? 'showed' : 'hidden'}
                         submited={this.state.submited}
                         apis={this.props.apis}
-                        isLoaded={this.props.isLoaded}/>
+                        isLoaded={this.props.isLoaded}
+                        isTrue={this.props.isTrue}/>
                         
                     <QuestionFooter
                         api={this.state.result}
