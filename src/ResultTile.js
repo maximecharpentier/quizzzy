@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import texts from './data';
+import data from './data';
 import winSVG from './assets/imgs/winner.svg';
 import looseSVG from './assets/imgs/looser.svg';
 class ResultTile extends Component {
@@ -32,7 +32,7 @@ class ResultTile extends Component {
             category: localStorage.getItem('category'),
             message: {
                 visual: this.state.points <= 3 ? looseSVG : winSVG,
-                title: this.state.points <= 3 ? texts.result.loose : texts.result.win
+                title: this.state.points <= 3 ? data.result.loose : data.result.win
             }
         })
     }
@@ -45,9 +45,9 @@ class ResultTile extends Component {
                         <span className="bold">0{this.state.points}/10</span>
                     </h3>
                     <p className="tile__info">In the category:<br/>
-                        <span className="tile__category--small">{this.props.isLoaded ? this.props.apis[this.state.category].title : this.props.data.categories[this.state.category].name}</span>
+                        <span className="tile__category--small">{this.props.isLoaded ? this.props.apis[this.state.category].title : data.categories[this.state.category].name}</span>
                     </p>
-                    <span className="tile__reminder">{texts.result.another}<br></br> Try another quiz here !</span>
+                    <span className="tile__reminder">{data.result.another}<br></br> Try another quiz here !</span>
                 </section>
             )
     }

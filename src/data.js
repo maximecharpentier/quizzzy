@@ -1,4 +1,4 @@
-const texts = {
+const data = {
     api: {
         "id":78,
         "title":"world capitals",
@@ -61,4 +61,4 @@ const texts = {
     }
 }
 
-export default texts;
+export default data;

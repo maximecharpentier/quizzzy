@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import globe from './assets/imgs/globe.svg';
+import data from './data';
 
 class Header extends Component {
     UNSAFE_componentWillMount = () => localStorage.setItem('category', 0);
@@ -7,14 +8,14 @@ class Header extends Component {
     render() {
         return (
             <header className="Header">
-                <img src={globe} alt={this.props.data.header.title}/>
-                <h1>{this.props.data.header.title}</h1>
+                <img src={globe} alt={data.header.title}/>
+                <h1>{data.header.title}</h1>
                 <ul className='filter'>
                     {this.props.apis.map((x, i) => <li 
                         className='filter__item'
                         onClick={() => this.updateCategory(i)}
-                        key={x.title} 
-                        index={i}>{x.title}
+                        key={x.result.title} 
+                        index={i}>{x.result.title}
                     </li>)}
                 </ul>
             </header>

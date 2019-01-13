@@ -4,13 +4,13 @@ import wrongSVG from './assets/imgs/false.svg'
 import QuestionHeader from './QuestionHeader';
 import QuestionFooter from './QuestionFooter';
 import Question from './Question';
-import texts from './data';
+import data from './data';
 
 class QuestionTile extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            result: this.props.isLoaded ? this.props.apis[localStorage.getItem('category')] : texts.api,
+            result: this.props.isLoaded ? this.props.apis[localStorage.getItem('category')] : data.api,
             answer: '',
             trueanswer: '',
             submited: false,
@@ -40,7 +40,7 @@ class QuestionTile extends Component {
     componentWillUnmount = () => clearInterval(this.resultID);
     getResult = () => {
         this.setState({
-            result: this.props.isLoaded ? this.props.apis[localStorage.getItem('category')] : texts.api,
+            result: this.props.isLoaded ? this.props.apis[localStorage.getItem('category')].result : data.api,
             trueanswer: this.state.result.clues[this.storageIndex].answer
         })
     };
