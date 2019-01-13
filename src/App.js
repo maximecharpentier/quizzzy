@@ -101,19 +101,19 @@ class App extends Component {
             isCategoryHidden: false,
             isMenuHidden: false,
         });
-    }
+    };
     resetScores = () => {
         // reset all the score, excepted points
         localStorage.setItem('questions', 1);
         localStorage.setItem('index', 0);
         localStorage.setItem('errors', 0);
         localStorage.setItem('reset', 0);
-    }
+    };
     goHome = () => {
         // hide questions and result, because we can go home from questions and results
         this.hideQuestions();
         this.hideResults();  
-    }
+    };
     render() {
         return (
             <section className='App'>
@@ -155,7 +155,7 @@ class App extends Component {
                 </section>
                 <Footer/>
             </section>
-        )
-    }
-}
+        );
+    };
+};
 export default App;
