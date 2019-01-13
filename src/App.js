@@ -29,6 +29,7 @@ class App extends Component {
             SVGs: [capitalSVG, brandSVG, animalsSVG],
             newApis: [],
             isLoaded: false,
+            loadedError: false
         }
     }
     UNSAFE_componentWillMount = () => this.loadAPis();
@@ -54,7 +55,7 @@ class App extends Component {
                     }
                     console.log(this.state.apis)
                 },
-                error => console.error(error)
+                error => this.setState({loadedError: true})
             )
         )
     }
@@ -96,6 +97,9 @@ class App extends Component {
     render() {
         return (
             <section className='App'>
+                <ErrorMessage
+                    isLoaded={this.state.loadedError}
+                />
                 <Loader 
                     style={this.state.isLoaded ? `${this.state.loaderStyle} invisible` : `${this.state.loaderStyle} showed`}
                 />
