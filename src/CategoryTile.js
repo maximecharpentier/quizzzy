@@ -19,7 +19,7 @@ class CategoryTile extends Component {
     componentDidMount = () => this.categoryID = setInterval(() => this.getCategory(), 200);
     UNSAFE_componentWillMount = () => clearInterval(this.categoryID);
     UNSAFE_componentWillUpdate = () => {
-        this.CategoryName = this.props.isLoaded ? this.props.apis[this.props.apis[this.state.category].i].result.title : data.categories[this.state.category].name;
+        this.CategoryName = this.props.isLoaded ? this.props.apis[this.props.apis[this.state.category].count].result.title : data.categories[this.state.category].name;
         this.CategoryUrl = this.state.SVGs[this.state.category];
     }
     getCategory = () => this.setState({category: localStorage.getItem('category')});

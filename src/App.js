@@ -34,7 +34,7 @@ class App extends Component {
             .then(
                 result => {
                     count++;
-                    apis.push({result, i});
+                    apis.push({result, count: i});
                     this.setState({
                         apis: apis,
                         isLoaded: count === data.categories.length ? true : false
@@ -45,6 +45,15 @@ class App extends Component {
                 error => console.error(error)
             )
         )
+        const newAPis = [];
+        apis.map((x, i) => {
+            console.log(`${x.count} - ${i}`);
+            if (x.i === i) {
+                newAPis.push(x);
+                console.log(newAPis)
+            }
+            console.log('wew')
+        })
     }
     hideCategory = () => this.setState({
         isCategoryHidden: true,
