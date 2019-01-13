@@ -45,16 +45,11 @@ class App extends Component {
                         isLoaded: count === data.categories.length ? true : false
                     });
                     if (this.state.isLoaded) {
-                        let news = [];
+                        let newApis = [];
                         this.state.apis.map((x, i) => {
-                            console.log(`${i} - ${x.count}`)
-                            news.splice(x.count, 0, x)
-                            console.log(news)
-                            this.setState({apis : news})
-                            console.log(this.state.apis)
+                            newApis.splice(x.count, 0, x)
+                            this.setState({apis : newApis})
                         })
-                        console.log('old')
-                        console.log(this.state.apis)
                     }
                 },
                 error => console.error(error)
