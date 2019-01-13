@@ -31,8 +31,8 @@ class ResultTile extends Component {
             questions: localStorage.getItem('questions'),
             category: localStorage.getItem('category'),
             message: {
-                visual: this.state.points <= 3 ? looseSVG : winSVG,
-                title: this.state.points <= 3 ? data.result.loose : data.result.win
+                visual: this.state.points <= 5 ? looseSVG : winSVG,
+                title: this.state.points <= 5 ? data.result.loose : data.result.win
             }
         })
     }
@@ -45,7 +45,7 @@ class ResultTile extends Component {
                         <span className="bold">0{this.state.points}/10</span>
                     </h3>
                     <p className="tile__info">In the category:<br/>
-                        <span className="tile__category--small">{this.props.isLoaded ? this.props.apis[this.state.category].title : data.categories[this.state.category].name}</span>
+                        <span className="tile__category--small">{this.props.isLoaded ? this.props.apis[this.state.category].result.title : data.categories[this.state.category].name}</span>
                     </p>
                     <span className="tile__reminder">{data.result.another}<br></br>Click to try another quiz !</span>
                 </section>
