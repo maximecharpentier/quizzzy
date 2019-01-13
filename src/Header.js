@@ -12,14 +12,17 @@ class Header extends Component {
                     <img className="brand__image" src={globe} alt={data.header.title} />
                     <p className="brand__title">{data.header.title}</p>
                 </h1>
-                <ul className='filter'>
-                    {this.props.apis.map((x, i) => <li
-                        className='filter__item'
-                        onClick={() => this.updateCategory(i)}
-                        key={x.result.title}
-                        index={i}>{x.result.title}
-                    </li>)}
-                </ul>
+                <div className='filter'>
+                    <button className="filter__button">Categories</button>
+                    <ul className="filter__items">
+                        {this.props.apis.map((x, i) => <li
+                            className='filter__item'
+                            onClick={() => this.updateCategory(i)}
+                            key={x.result.title}
+                            index={i}>{x.result.title}
+                        </li>)}
+                    </ul>
+                </div>
             </header>
         )
     }
