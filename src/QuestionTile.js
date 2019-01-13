@@ -13,7 +13,7 @@ class QuestionTile extends Component {
             result: this.props.isLoaded ? this.props.apis[localStorage.getItem('category')] : data.api,
             answer: '',
             trueanswer: '',
-            submited: false,
+            isSubmitted: false,
             visual: wrongSVG,
             default: false
         }
@@ -35,112 +35,112 @@ class QuestionTile extends Component {
         localStorage.setItem('reset', this.storageReset);
         // if (!localStorage.getItem('errors')) 
         localStorage.setItem('errors', this.storageErrors);
+        clearInterval(this.resultID);
     }
     componentDidMount = () => this.resultID = setInterval(() => this.getResult(), 200);
-    componentWillUnmount = () => clearInterval(this.resultID);
-    getResult = () => {
-        this.setState({
+    getResult = () => this.setState({
             result: this.props.isLoaded ? this.props.apis[localStorage.getItem('category')].result : data.api,
             trueanswer: this.state.result.clues[this.storageIndex].answer
-        })
-    };
+    });
 
     onSubmit = (e) => {
         e.preventDefault();
         if (this.state.answer.toLowerCase() === this.state.trueanswer.toLowerCase()) {
+            this.correctUpdate();
             this.setState({
                 visual: correctSVG,
-                trueanswer: this.state.result.clues[this.storageQuestions].answer
+                answer: '',
+                trueanswer: this.state.result.clues[this.storageQuestions].answer,
+                isSubmitted: true
             });
-            this.storagePoints++;
-            localStorage.setItem('points', this.storagePoints)
 
         }
         else {
-            this.storageErrors++;
-            localStorage.setItem('errors', this.storageErrors) 
+            this.wrongUpdate();
+            this.setState({
+                visual: wrongSVG,
+                answer: '',
+                trueanswer: this.state.result.clues[this.storageQuestions].answer,
+                isSubmitted: true
+            });
         }
-        this.setState({
-            answer: '',
-            trueanswer: this.state.result.clues[this.storageQuestions].answer,
-            submited: true
-        });
+        if (this.storageErrors === 3) {
+            this.resultUpdate();
+            this.storageReset = 0;
+            localStorage.setItem('reset', this.storageReset);
+        }
+        if (this.storageIndex === 10) {
+            this.resultUpdate();
+        }
+    }
+    correctUpdate = () => {
+        this.storagePoints++;
         this.storageQuestions++;
         this.storageIndex++;
+        localStorage.setItem('points', this.storagePoints)
         localStorage.setItem('questions', this.storageQuestions)
         localStorage.setItem('index', this.storageIndex)
-        if (this.storageErrors === 3) {
-            this.errors();
-            this.props.loose();
-         }
-         if (this.storageIndex === 9) {
-            this.props.loose();
-         }
-        console.log(this.storageErrors)
     }
-
-    errors = () => {
-        this.storagePoints = 0;
+    wrongUpdate = () => {
+        this.storageQuestions++;
+        this.storageIndex++;
+        this.storageErrors++;
+        localStorage.setItem('questions', this.storageQuestions)
+        localStorage.setItem('index', this.storageIndex)
+        localStorage.setItem('errors', this.storageErrors) 
+    }
+    resultUpdate = () => {
+        this.props.goToResult();
+        this.setState({isSubmitted: false})
         this.storageQuestions = 1;
         this.storageIndex = 0;
         this.storageErrors = 0;
-        localStorage.setItem('points', 0);
-        localStorage.setItem('questions', 1);
-        localStorage.setItem('index', 0);
-        localStorage.setItem('errors', 0);
-        this.setState({
-            answer: '',
-            trueanswer: this.state.result.clues[this.storageIndex].answer,
-        })
+        localStorage.setItem('questions', this.storageQuestions);
+        localStorage.setItem('index', this.storageIndex);
+        localStorage.setItem('errors', this.storageErrors);
     }
     onChange = (e) => {
         this.setState({
             answer: e.target.value,
-            submited: false,
+            isSubmitted: false,
             visual: wrongSVG
         })
         console.clear();
         console.log(this.state.trueanswer)
     }
-    resetScore = () => {
+    resetScores = () => {
+        this.resultUpdate();
         this.storagePoints = 0;
-        this.storageQuestions = 1;
-        this.storageIndex = 0;
-        this.storageErrors = 0;
-        this.storageReset++;
-        localStorage.setItem('points', 0);
-        localStorage.setItem('questions', 1);
-        localStorage.setItem('index', 0);
-        localStorage.setItem('errors', 0)
-        localStorage.setItem('reset', this.storageReset);
+        localStorage.setItem('points', this.storagePoints);
         this.setState({
             answer: '',
             trueanswer: this.state.result.clues[this.storageIndex].answer,
-        })
+            isSubmitted: false
+        });
+    }
+    resetAll = () => {
+        this.resetScores();
+        this.storageReset++;
+        localStorage.setItem('reset', this.storageReset);
     }
     render() {
             return (
                 <section className={this.props.style}>
                     <QuestionHeader
-                        points={this.storagePoints}
-                        question={this.storageQuestions}/>
+                        points={localStorage.getItem('points')}
+                        question={localStorage.getItem('questions')}/>
                     <Question
+                        api={this.state.result.clues[this.storageIndex].question}
                         onSubmit={this.onSubmit}
-                        api={this.state.result}
                         onChange={this.onChange}
                         answer={this.state.answer}
                         visual={this.state.visual}
                         question={this.storageIndex}
-                        css={this.state.submited ? 'showed' : 'hidden'}
-                        submited={this.state.submited}
-                        apis={this.props.apis}
-                        isLoaded={this.props.isLoaded}
-                        isTrue={this.props.isTrue}/>
-                        
+                        css={this.state.isSubmitted ? 'showed' : 'hidden'}
+                    />
                     <QuestionFooter
-                        api={this.state.result}
-                        reset={this.storageReset}
-                        resetScore={this.resetScore}/>
+                        resetCounter={this.storageReset}
+                        click={this.resetAll}/>
                 </section>
             )
     }

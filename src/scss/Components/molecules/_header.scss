@@ -3,8 +3,12 @@
     top: 0px;
     right: 0px;
     left: 0px;
+    z-index: 10;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
+}
+.menuBoxHidden {
+    display: none;
 }

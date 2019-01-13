@@ -1,28 +1,54 @@
 .filter {
     position: absolute;
-    top: calc(50% - 7px);
-    right: 35px;
+    top: 27px;
+    right: 20px;
+    width: 140px;
+    box-shadow: -1px 4px 18px 0 rgba(0, 0, 0, 0.2);
     &:after {
         position: absolute;
-        top: -3px;
-        left: 100%;
-        margin-left: 4px;
+        top: 9px;
+        right: 16px;
         display: inline-block;
         content: '▾';
         font-size: 18px;
-        color: $white;
+        color: $blue;
     }
     &--active:after {
-        top: -1px;
+        top: 11px;
         transform: rotate(180deg);
     }
 }
-.filter__item {
-    font-size: 14px;
-    color: $red;
+.filter__button {
+    width: 100%;
+    padding: 10px 16px;
+    font-size: 13px;
+    text-align: left;
+    color: $blue;
+    background: $grey;
+    border-radius: 3px;
     cursor: pointer;
-    &:not(:last-child) {
-        margin-bottom: 15px;
-    }
+}
+.filter--active .filter__button {
+    border-radius: 3px 3px 0px 0px;
+    box-shadow: 4px 0px 24px 0 rgba(0, 0, 0, 0.1);
+}
+.filter__items {
+    display: none;
+    width: 100%;
+    border-top: none;
+    border-radius: 0px 0px 3px 3px;
+    background: $greyThird;
+}
+.filter--active .filter__items {
+    display: block;
+}
+.filter__item {
+    padding: 10px 16px;
+    font-size: 13px;
+    color: $blue;
+    cursor: pointer;
     text-transform: capitalize;
+    &--active {
+        color: $red;
+    }
 }
