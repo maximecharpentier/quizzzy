@@ -72,9 +72,14 @@ class QuestionTile extends Component {
         if (this.storageErrors === 3) {
             this.errors();
             this.props.loose();
+            this.setState({submited: false})
+
+            this.storageReset = 0;
+            localStorage.setItem('reset', this.storageReset);
          }
-         if (this.storageIndex === 9) {
+         if (this.storageIndex === 10) {
             this.props.loose();
+            this.setState({submited: false})
          }
         console.log(this.storageErrors)
     }

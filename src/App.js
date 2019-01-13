@@ -80,9 +80,16 @@ class App extends Component {
     render() {
         return (
             <section className='App'>
-                <Loader style={this.state.isLoaded ? `${this.state.loaderStyle} invisible` : `${this.state.loaderStyle} showed`}/>
+                <Loader 
+                    style={this.state.isLoaded ? `${this.state.loaderStyle} invisible` : `${this.state.loaderStyle} showed`}
+                />
                 <Header
                     apis={this.state.apis}
+                    click={() => {
+                        console.log('<ow')
+                        this.hideQuestions();
+                        this.hideResults();                    
+                    }}
                 />
                 <section className='tiles'>
                     <CategoryTile
