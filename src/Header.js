@@ -8,13 +8,15 @@ class Header extends Component {
     render() {
         return (
             <header className="Header">
-                <img src={globe} alt={data.header.title}/>
-                <h1>{data.header.title}</h1>
+                <h1 className="brand">
+                    <img className="brand__image" src={globe} alt={data.header.title} />
+                    <p className="brand__title">{data.header.title}</p>
+                </h1>
                 <ul className='filter'>
-                    {this.props.apis.map((x, i) => <li 
+                    {this.props.apis.map((x, i) => <li
                         className='filter__item'
                         onClick={() => this.updateCategory(i)}
-                        key={x.result.title} 
+                        key={x.result.title}
                         index={i}>{x.result.title}
                     </li>)}
                 </ul>

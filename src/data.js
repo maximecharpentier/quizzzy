@@ -3,7 +3,7 @@ const data = {
         "id":78,
         "title":"world capitals",
         "clues_count":140,
-        "clues": [ 
+        "clues": [
             {
             "id": 481, "answer": "San Jose", "question": "Costa Rican capital people might know the way to", "value": 100, "airdate": "1984-09-25T12:00:00.000Z", "category_id": 78, "game_id": null, "invalid_count": null
             }
@@ -49,8 +49,7 @@ const data = {
             welcome: 'Welcome on',
             name: 'Quizzzy'
         },
-        desc: 'Choose a quiz among the categories below',
-        footer: 'Click on the tile to begin'
+        desc: 'Click on the tile to begin'
     },
     result: {
         win: 'Your\'re a winner !',
