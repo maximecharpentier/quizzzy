@@ -51,6 +51,7 @@ class App extends Component {
                             this.setState({apis : newApis})
                         })
                     }
+                    console.log(this.state.apis)
                 },
                 error => console.error(error)
             )

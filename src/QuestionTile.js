@@ -130,7 +130,7 @@ class QuestionTile extends Component {
                         points={localStorage.getItem('points')}
                         question={localStorage.getItem('questions')}/>
                     <Question
-                        api={this.state.result}
+                        api={this.state.result.clues[this.storageIndex].question}
                         onSubmit={this.onSubmit}
                         onChange={this.onChange}
                         answer={this.state.answer}
