@@ -52,6 +52,7 @@ class App extends Component {
                             this.setState({apis : newApis})
                         })
                     }
+                    console.log(this.state.apis)
                 },
                 error => console.error(error)
             )
@@ -59,38 +60,49 @@ class App extends Component {
     }
     hideCategory = () => this.setState({
         isCategoryHidden: true,
-        isQuestionsHidden: false
+        isQuestionsHidden: false,
+        isMenuHidden: true,
+
     })
-    hideQuestions = () => this.setState({
-        isQuestionsHidden: true,
-        isResultHidden: false
-    })
+    hideQuestions = () => {
+        localStorage.setItem('questions', 1);
+        localStorage.setItem('index', 0);
+        localStorage.setItem('errors', 0);
+        localStorage.setItem('reset', 0);
+        this.setState({
+            isQuestionsHidden: true,
+            isResultHidden: false
+        })
+    };
     hideResults = () => {
-        this.resetScore();
+        this.resetScores();
         return this.setState({
             isResultHidden: true,
-            isCategoryHidden: false
+            isCategoryHidden: false,
+            isMenuHidden: false,
         })
     }
-    resetScore = () => {
+    resetScores = () => {
         localStorage.setItem('points', 0);
         localStorage.setItem('questions', 1);
         localStorage.setItem('index', 0);
         localStorage.setItem('errors', 0);
+        localStorage.setItem('reset', 0);
+    }
+    goHome = () => {
+        this.hideQuestions();
+        this.hideResults();  
     }
     render() {
         return (
             <section className='App'>
-                <Loader
+                <Loader 
                     style={this.state.isLoaded ? `${this.state.loaderStyle} invisible` : `${this.state.loaderStyle} showed`}
                 />
                 <Header
                     apis={this.state.apis}
-                    click={() => {
-                        console.log('<ow')
-                        this.hideQuestions();
-                        this.hideResults();
-                    }}
+                    click={this.goHome}
+                    isMenuHidden={this.state.isMenuHidden}
                 />
                 <section className='tiles'>
                     <CategoryTile
@@ -104,7 +116,7 @@ class App extends Component {
                         style={this.state.isQuestionsHidden ? this.state.questionHiddenStyle : this.state.questionsStyle}
                         apis={this.state.apis}
                         isLoaded={this.state.isLoaded}
-                        loose={this.hideQuestions}
+                        goToResult={this.hideQuestions}
                     />
                     <ResultTile
                         style={this.state.isResultHidden ? this.state.resultHiddenStyle : this.state.resultStyle}

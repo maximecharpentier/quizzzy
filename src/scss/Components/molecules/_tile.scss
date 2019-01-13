@@ -112,6 +112,7 @@
         font-size: 18px;
         font-weight: 500;
         color: $red;
+        text-transform: capitalize;
     }
     &:first-letter {
         text-transform: uppercase;
