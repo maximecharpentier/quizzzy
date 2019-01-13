@@ -60,22 +60,33 @@ class App extends Component {
         isCategoryHidden: true,
         isQuestionsHidden: false
     })
-    hideQuestions = () => this.setState({
-        isQuestionsHidden: true,
-        isResultHidden: false
-    })
+    hideQuestions = () => {
+        localStorage.setItem('questions', 1);
+        localStorage.setItem('index', 0);
+        localStorage.setItem('errors', 0);
+        localStorage.setItem('reset', 0);
+        this.setState({
+            isQuestionsHidden: true,
+            isResultHidden: false
+        })
+    };
     hideResults = () => {
-        this.resetScore();
+        this.resetScores();
         return this.setState({
             isResultHidden: true,
             isCategoryHidden: false
         })
     }
-    resetScore = () => {
+    resetScores = () => {
         localStorage.setItem('points', 0);
         localStorage.setItem('questions', 1);
         localStorage.setItem('index', 0);
         localStorage.setItem('errors', 0);
+        localStorage.setItem('reset', 0);
+    }
+    goHome = () => {
+        this.hideQuestions();
+        this.hideResults();  
     }
     render() {
         return (
@@ -85,11 +96,7 @@ class App extends Component {
                 />
                 <Header
                     apis={this.state.apis}
-                    click={() => {
-                        console.log('<ow')
-                        this.hideQuestions();
-                        this.hideResults();                    
-                    }}
+                    click={this.goHome}
                 />
                 <section className='tiles'>
                     <CategoryTile
@@ -103,7 +110,7 @@ class App extends Component {
                         style={this.state.isQuestionsHidden ? this.state.questionHiddenStyle : this.state.questionsStyle}
                         apis={this.state.apis}
                         isLoaded={this.state.isLoaded}
-                        loose={this.hideQuestions}
+                        goToResult={this.hideQuestions}
                     />
                     <ResultTile
                         style={this.state.isResultHidden ? this.state.resultHiddenStyle : this.state.resultStyle}

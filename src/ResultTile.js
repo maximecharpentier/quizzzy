@@ -31,8 +31,8 @@ class ResultTile extends Component {
             questions: localStorage.getItem('questions'),
             category: localStorage.getItem('category'),
             message: {
-                visual: this.state.points <= 3 ? looseSVG : winSVG,
-                title: this.state.points <= 3 ? data.result.loose : data.result.win
+                visual: this.state.points <= 5 ? looseSVG : winSVG,
+                title: this.state.points <= 5 ? data.result.loose : data.result.win
             }
         })
     }
