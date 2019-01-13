@@ -45,7 +45,8 @@ class ResultTile extends Component {
                         <span className="bold">0{this.state.points}/10</span>
                     </h3>
                     <p className="tile__info">In the category:<br/>
-                        <span className="tile__category--small">{this.props.isLoaded ? this.props.apis[this.state.category].title : data.categories[this.state.category].name}</span>
+                        <span className="tile__category--small">{
+                            this.props.isLoaded ? this.props.apis[this.state.category].title : data.categories[this.state.category].name}</span>
                     </p>
                     <span className="tile__reminder">{data.result.another}<br></br> Try another quiz here !</span>
                 </section>

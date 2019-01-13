@@ -106,10 +106,12 @@ class QuestionTile extends Component {
         this.storagePoints = 0;
         this.storageQuestions = 1;
         this.storageIndex = 0;
+        this.storageErrors = 0;
         this.storageReset++;
         localStorage.setItem('points', 0);
         localStorage.setItem('questions', 1);
         localStorage.setItem('index', 0);
+        localStorage.setItem('errors', 0)
         localStorage.setItem('reset', this.storageReset);
         this.setState({
             answer: '',
@@ -132,7 +134,8 @@ class QuestionTile extends Component {
                         css={this.state.submited ? 'showed' : 'hidden'}
                         submited={this.state.submited}
                         apis={this.props.apis}
-                        isLoaded={this.props.isLoaded}/>
+                        isLoaded={this.props.isLoaded}
+                        isTrue={this.props.isTrue}/>
                         
                     <QuestionFooter
                         api={this.state.result}

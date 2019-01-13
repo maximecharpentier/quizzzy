@@ -6,6 +6,9 @@ import CategoryTile from './CategoryTile';
 import QuestionTile from './QuestionTile';
 import ResultTile from './ResultTile';
 import Footer from './Footer';
+import brandSVG from './assets/imgs/brand.svg';
+import capitalSVG from './assets/imgs/capital.svg';
+import animalsSVG from './assets/imgs/cat.svg';
 
 class App extends Component {
     constructor(props) {
@@ -22,7 +25,9 @@ class App extends Component {
             questionHiddenStyle: 'tile tile--question hidden',
             loaderStyle: 'Loader',
             apis: [],
-            isLoaded: false
+            SVGs: [capitalSVG, brandSVG, animalsSVG],
+            newApis: [],
+            isLoaded: false,
         }
     }
     UNSAFE_componentWillMount = () => this.loadAPis();
@@ -39,21 +44,22 @@ class App extends Component {
                         apis: apis,
                         isLoaded: count === data.categories.length ? true : false
                     });
-                    console.log(i)
-                    console.log(apis)
+                    if (this.state.isLoaded) {
+                        let news = [];
+                        this.state.apis.map((x, i) => {
+                            console.log(`${i} - ${x.count}`)
+                            news.splice(x.count, 0, x)
+                            console.log(news)
+                            this.setState({apis : news})
+                            console.log(this.state.apis)
+                        })
+                        console.log('old')
+                        console.log(this.state.apis)
+                    }
                 },
                 error => console.error(error)
             )
         )
-        const newAPis = [];
-        apis.map((x, i) => {
-            console.log(`${x.count} - ${i}`);
-            if (x.i === i) {
-                newAPis.push(x);
-                console.log(newAPis)
-            }
-            console.log('wew')
-        })
     }
     hideCategory = () => this.setState({
         isCategoryHidden: true,
@@ -74,6 +80,7 @@ class App extends Component {
         localStorage.setItem('points', 0);
         localStorage.setItem('questions', 1);
         localStorage.setItem('index', 0);
+        localStorage.setItem('errors', 0);
     }
     render() {
         return (
@@ -88,6 +95,7 @@ class App extends Component {
                         click={this.hideCategory}
                         apis={this.state.apis}
                         isLoaded={this.state.isLoaded}
+                        SVGs={this.state.SVGs}
                     />
                     <QuestionTile
                         style={this.state.isQuestionsHidden ? this.state.questionHiddenStyle : this.state.questionsStyle}
