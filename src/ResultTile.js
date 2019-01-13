@@ -47,7 +47,7 @@ class ResultTile extends Component {
                     <p className="tile__info">In the category:<br/>
                         <span className="tile__category--small">{this.props.isLoaded ? this.props.apis[this.state.category].title : data.categories[this.state.category].name}</span>
                     </p>
-                    <span className="tile__reminder">{data.result.another}<br></br> Try another quiz here !</span>
+                    <span className="tile__reminder">{data.result.another}<br></br>Click to try another quiz !</span>
                 </section>
             )
     }
