@@ -30,7 +30,6 @@ class CategoryTile extends Component {
                 <p className="tile__info">{data.category.desc}</p>
                 <img className="tile__image" src={this.CategoryUrl} alt=""/>
                 <h3 className="tile__category">{this.CategoryName}</h3>
-                <p className="tile__instruction">{data.category.footer}</p>
             </section>
         )
     }

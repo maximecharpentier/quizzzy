@@ -12,14 +12,14 @@ class App extends Component {
         super(props);
         this.state = {
             isCategoryHidden: false,
-            categoryStyle: 'tile tile__category',
-            categoryHiddenStyle: 'tile tile__category hidden',
+            categoryStyle: 'tile tile--category',
+            categoryHiddenStyle: 'tile tile--category hidden',
             isResultHidden: true,
             resultStyle: 'tile tile--result',
             resultHiddenStyle: 'tile tile--result hidden',
             isQuestionsHidden: true,
-            questionsStyle: 'tile tile__question',
-            questionHiddenStyle: 'tile tile__question hidden',
+            questionsStyle: 'tile tile--question',
+            questionHiddenStyle: 'tile tile--question hidden',
             loaderStyle: 'Loader',
             apis: [],
             isLoaded: false
@@ -70,18 +70,18 @@ class App extends Component {
         return (
             <section className='App'>
                 <Loader style={this.state.isLoaded ? `${this.state.loaderStyle} invisible` : `${this.state.loaderStyle} showed`}/>
-                <Header 
+                <Header
                     apis={this.state.apis}
                 />
                 <section className='tiles'>
-                    <CategoryTile  
-                        style={this.state.isCategoryHidden ? this.state.categoryHiddenStyle : this.state.categoryStyle} 
+                    <CategoryTile
+                        style={this.state.isCategoryHidden ? this.state.categoryHiddenStyle : this.state.categoryStyle}
                         click={this.hideCategory}
                         apis={this.state.apis}
                         isLoaded={this.state.isLoaded}
                     />
-                    <QuestionTile 
-                        style={this.state.isQuestionsHidden ? this.state.questionHiddenStyle : this.state.questionsStyle} 
+                    <QuestionTile
+                        style={this.state.isQuestionsHidden ? this.state.questionHiddenStyle : this.state.questionsStyle}
                         apis={this.state.apis}
                         isLoaded={this.state.isLoaded}
                         loose={this.hideQuestions}
