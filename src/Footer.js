@@ -8,7 +8,7 @@ class Footer extends Component {
                 <p className="footer__item">{data.footer.author}</p>
                 <p className="footer__item">{data.footer.service.by}&nbsp;<span className="bold">{data.footer.service.name}</span></p>
             </footer>
-        )
-    }
-}
+        );
+    };
+};
 export default Footer;
