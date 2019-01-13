@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import data from './data';
 
 class ErrorMessage extends Component {
     render() {
         return (
+            // display the error message if any of all apis isn't loaded successfully
             <div className={this.props.isLoaded ? 'error' : 'error hidden'}>
-                <p className="error__title">Oops !</p>
-                <p className="error__message">It appears that resources couldn't be loaded properly, please :</p>
-                <a className="error__button" href="/">Try again</a>
+                <h2 className="error__title">{data.error.title}</h2>
+                <p className="error__message">{data.error.content}</p>
+                <a className="error__button" href="/">{data.error.cta}</a>
             </div>
         )
     }

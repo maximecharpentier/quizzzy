@@ -60,6 +60,11 @@ const data = {
             name: 'jService',
         }
     },
+    error: {
+        title: 'Oops !',
+        content: 'It appears that resources couldn\'t be loaded properly, please :',
+        cta: 'Try again'
+    },
     categories: [
         {
             name: 'DEFAULT_CATEGORY',
