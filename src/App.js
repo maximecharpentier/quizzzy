@@ -6,6 +6,7 @@ import CategoryTile from './CategoryTile';
 import QuestionTile from './QuestionTile';
 import ResultTile from './ResultTile';
 import Footer from './Footer';
+import ErrorMessage from './ErrorMessage';
 import brandSVG from './assets/imgs/brand.svg';
 import capitalSVG from './assets/imgs/capital.svg';
 import animalsSVG from './assets/imgs/cat.svg';
@@ -80,7 +81,7 @@ class App extends Component {
     render() {
         return (
             <section className='App'>
-                <Loader 
+                <Loader
                     style={this.state.isLoaded ? `${this.state.loaderStyle} invisible` : `${this.state.loaderStyle} showed`}
                 />
                 <Header
@@ -88,7 +89,7 @@ class App extends Component {
                     click={() => {
                         console.log('<ow')
                         this.hideQuestions();
-                        this.hideResults();                    
+                        this.hideResults();
                     }}
                 />
                 <section className='tiles'>
