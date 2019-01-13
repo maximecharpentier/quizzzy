@@ -8,7 +8,10 @@ class Header extends Component {
         this.state = {
             isHidden: true,
             menuStyle: 'filter filter--active',
-            menuHiddenStyle: 'filter'
+            menuHiddenStyle: 'filter',
+            menuBoxStyle: 'menuBox',
+            menuBoxHiddenStyle: 'menuBoxHidden'
+
         }
     }
     UNSAFE_componentWillMount = () => localStorage.setItem('category', 0);
@@ -21,16 +24,18 @@ class Header extends Component {
                     <img className="brand__image" src={globe} alt={data.header.title} />
                     <p className="brand__title">{data.header.title}</p>
                 </h1>
-                <div className={this.state.isHidden ? this.state.menuHiddenStyle : this.state.menuStyle}>
-                    <button className="filter__button " onClick={this.toggleMenu}>Categories</button>
-                    <ul className="filter__items filter__items--active">
-                        {this.props.apis.map((x, i) => <li
-                            className='filter__item'
-                            onClick={() => this.updateCategory(i)}
-                            key={x.result.title}
-                            index={i}>{x.result.title}
-                        </li>)}
-                    </ul>
+                <div className={!this.props.isMenuHidden ? this.state.menuBoxStyle : this.state.menuBoxHiddenStyle}>
+                    <div className={this.state.isHidden ? this.state.menuHiddenStyle : this.state.menuStyle}>
+                        <button className="filter__button " onClick={this.toggleMenu}>Categories</button>
+                        <ul className="filter__items filter__items--active">
+                            {this.props.apis.map((x, i) => <li
+                                className='filter__item'
+                                onClick={() => this.updateCategory(i)}
+                                key={x.result.title}
+                                index={i}>{x.result.title}
+                            </li>)}
+                        </ul>
+                    </div>
                 </div>
             </header>
         )

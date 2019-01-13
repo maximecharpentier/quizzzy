@@ -59,7 +59,9 @@ class App extends Component {
     }
     hideCategory = () => this.setState({
         isCategoryHidden: true,
-        isQuestionsHidden: false
+        isQuestionsHidden: false,
+        isMenuHidden: true,
+
     })
     hideQuestions = () => {
         localStorage.setItem('questions', 1);
@@ -75,7 +77,8 @@ class App extends Component {
         this.resetScores();
         return this.setState({
             isResultHidden: true,
-            isCategoryHidden: false
+            isCategoryHidden: false,
+            isMenuHidden: false,
         })
     }
     resetScores = () => {
@@ -98,6 +101,7 @@ class App extends Component {
                 <Header
                     apis={this.state.apis}
                     click={this.goHome}
+                    isMenuHidden={this.state.isMenuHidden}
                 />
                 <section className='tiles'>
                     <CategoryTile
