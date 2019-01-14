@@ -16,8 +16,7 @@ class Question extends Component {
                 </form>
                 <img className={'tile__result ' + this.props.css} src={this.props.visual} alt=""/>
             </div>
-        )
-    }
-}
-
+        );
+    };
+};
 export default Question;
