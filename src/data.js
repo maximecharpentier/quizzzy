@@ -68,17 +68,17 @@ const data = {
     categories: [
         {
             name: 'DEFAULT_CATEGORY',
-            url: 'http://jservice.io/api/category?id=78',
+            url: 'https://jservice.io/api/category?id=78',
             index: 0
         },
         {
             name: 'DEFAULT_CATEGORY',
-            url: 'http://jservice.io/api/category?id=2537',
+            url: 'https://jservice.io/api/category?id=2537',
             index: 1
         },
         {
             name: 'DEFAULT_CATEGORY',
-            url: 'http://jservice.io/api/category?id=2289',
+            url: 'https://jservice.io/api/category?id=2289',
             index: 2
         }
     ],
