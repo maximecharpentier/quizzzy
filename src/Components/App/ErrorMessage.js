@@ -7,7 +7,7 @@ class ErrorMessage extends Component {
     render() {
         return (
             // display the error message if any of all apis isn't loaded successfully
-            <div className={this.props.isLoaded ? 'error' : 'error'}>
+            <div className={this.props.isLoaded ? 'error' : 'error hidden'}>
                 <h2 className="error__title">{data.error.title}</h2>
                 <h3 className="error__message">{data.error.disclaimer}</h3>
                 <p className="error__message">{data.error.instructions[0]}</p>
