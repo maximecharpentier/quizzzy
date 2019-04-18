@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "460e07faef9d06f1c4c9",
+    "revision": "fd1f55d0c6c4e45f5cd8",
     "url": "/quizzzy/static/css/main.1c9c3a8a.chunk.css"
   },
   {
-    "revision": "460e07faef9d06f1c4c9",
-    "url": "/quizzzy/static/js/main.460e07fa.chunk.js"
+    "revision": "fd1f55d0c6c4e45f5cd8",
+    "url": "/quizzzy/static/js/main.fd1f55d0.chunk.js"
   },
   {
     "revision": "77fbaf075e1ba9f52885",
@@ -48,7 +48,7 @@ self.__precacheManifest = [
     "url": "/quizzzy/static/media/cat.a4c3b352.svg"
   },
   {
-    "revision": "a997c21c079277f32b7d92dbc012e23a",
+    "revision": "8128ab955154c78ea0761f36478cdefc",
     "url": "/quizzzy/index.html"
   }
 ];
