@@ -1,7 +1,7 @@
 {
   "main.css": "/quizzzy/static/css/main.4658304b.chunk.css",
-  "main.js": "/quizzzy/static/js/main.9396a445.chunk.js",
-  "main.js.map": "/quizzzy/static/js/main.9396a445.chunk.js.map",
+  "main.js": "/quizzzy/static/js/main.5a537f40.chunk.js",
+  "main.js.map": "/quizzzy/static/js/main.5a537f40.chunk.js.map",
   "static/js/1.f2f7ee45.chunk.js": "/quizzzy/static/js/1.f2f7ee45.chunk.js",
   "static/js/1.f2f7ee45.chunk.js.map": "/quizzzy/static/js/1.f2f7ee45.chunk.js.map",
   "runtime~main.js": "/quizzzy/static/js/runtime~main.88ede40d.js",
@@ -17,6 +17,6 @@
   "static/media/cat.svg": "/quizzzy/static/media/cat.a4c3b352.svg",
   "static/css/main.4658304b.chunk.css.map": "/quizzzy/static/css/main.4658304b.chunk.css.map",
   "index.html": "/quizzzy/index.html",
-  "precache-manifest.d423894a64d6db29985e1ad14e9f3b4b.js": "/quizzzy/precache-manifest.d423894a64d6db29985e1ad14e9f3b4b.js",
+  "precache-manifest.ccf61841b0b25ea9f928e5e4efc30f99.js": "/quizzzy/precache-manifest.ccf61841b0b25ea9f928e5e4efc30f99.js",
   "service-worker.js": "/quizzzy/service-worker.js"
 }
