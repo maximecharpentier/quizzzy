@@ -48,7 +48,7 @@ self.__precacheManifest = [
     "url": "/quizzzy/static/media/cat.a4c3b352.svg"
   },
   {
-    "revision": "8a8a062cb2ed8a05e0f962bc2272bfce",
+    "revision": "d78ef6e00cea65093e0d227e57dee78a",
     "url": "/quizzzy/index.html"
   }
 ];
