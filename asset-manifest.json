@@ -1,9 +1,9 @@
 {
-  "main.css": "/quizzzy/static/css/main.d8e3c839.chunk.css",
-  "main.js": "/quizzzy/static/js/main.52d40b9c.chunk.js",
-  "main.js.map": "/quizzzy/static/js/main.52d40b9c.chunk.js.map",
-  "static/js/1.2e8aeaab.chunk.js": "/quizzzy/static/js/1.2e8aeaab.chunk.js",
-  "static/js/1.2e8aeaab.chunk.js.map": "/quizzzy/static/js/1.2e8aeaab.chunk.js.map",
+  "main.css": "/quizzzy/static/css/main.1c9c3a8a.chunk.css",
+  "main.js": "/quizzzy/static/js/main.d9977daa.chunk.js",
+  "main.js.map": "/quizzzy/static/js/main.d9977daa.chunk.js.map",
+  "static/js/1.77fbaf07.chunk.js": "/quizzzy/static/js/1.77fbaf07.chunk.js",
+  "static/js/1.77fbaf07.chunk.js.map": "/quizzzy/static/js/1.77fbaf07.chunk.js.map",
   "runtime~main.js": "/quizzzy/static/js/runtime~main.88ede40d.js",
   "runtime~main.js.map": "/quizzzy/static/js/runtime~main.88ede40d.js.map",
   "static/media/false.svg": "/quizzzy/static/media/false.185884df.svg",
@@ -14,8 +14,8 @@
   "static/media/brand.svg": "/quizzzy/static/media/brand.b6da3589.svg",
   "static/media/capital.svg": "/quizzzy/static/media/capital.8149793e.svg",
   "static/media/cat.svg": "/quizzzy/static/media/cat.a4c3b352.svg",
-  "static/css/main.d8e3c839.chunk.css.map": "/quizzzy/static/css/main.d8e3c839.chunk.css.map",
+  "static/css/main.1c9c3a8a.chunk.css.map": "/quizzzy/static/css/main.1c9c3a8a.chunk.css.map",
   "index.html": "/quizzzy/index.html",
-  "precache-manifest.f0482680e720f28b5bc416b2e50542c6.js": "/quizzzy/precache-manifest.f0482680e720f28b5bc416b2e50542c6.js",
+  "precache-manifest.e6331537b1ac11d70759d21bd1c606f7.js": "/quizzzy/precache-manifest.e6331537b1ac11d70759d21bd1c606f7.js",
   "service-worker.js": "/quizzzy/service-worker.js"
 }
