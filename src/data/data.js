@@ -62,7 +62,11 @@ const data = {
     },
     error: {
         title: 'Oops !',
-        content: 'It appears that resources couldn\'t be loaded properly, please :',
+        disclaimer: 'It appears that resources couldn\'t be loaded properly, please :',
+        instructions: [
+            `1. Click on the shield on the right of your adress bar`,
+            `2. Click on "Load Unsafe Scripts" to load the content`
+        ],
         cta: 'Try again'
     },
     categories: [
